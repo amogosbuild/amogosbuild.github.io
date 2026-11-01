@@ -1,0 +1,21 @@
+# Check committed packages, signatures, indexes and the updater lifecycle.
+name: Validate Debian repository
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Install repository tools
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends dpkg-dev gnupg
+      - name: Verify signed archive
+        run: python3 amogos-debian/scripts/validate-repository.py
+      - name: Test authenticated APT downloads and updater detection
+        run: python3 amogos-debian/tests/test-apt.py
+      - name: Test updater install, upgrade, retry and purge
+        run: sudo python3 amogos-debian/tests/test-updater.py

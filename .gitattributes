@@ -1,0 +1,7 @@
+# Preserve signed metadata bytes and Linux script line endings.
+* text=auto eol=lf
+*.deb binary
+*.gpg binary
+*.gz binary
+*.xz binary
+amogos-debian/dists/**/by-hash/** binary

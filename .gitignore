@@ -1,0 +1,10 @@
+# Signing material and local build output never belong in the public archive.
+__pycache__/
+.repository-build-*/
+*.zip
+*.tar.gz
+*.private.asc
+*.secret.asc
+.gnupg/
+private-keys-v1.d/
+openpgp-revocs.d/

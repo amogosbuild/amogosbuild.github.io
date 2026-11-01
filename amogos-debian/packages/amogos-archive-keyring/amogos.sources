@@ -1,0 +1,7 @@
+# Trust only the AmogOS archive key for this repository.
+Types: deb
+URIs: https://amogosbuild.github.io/amogos-debian
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /usr/share/keyrings/amogos-archive-keyring.gpg

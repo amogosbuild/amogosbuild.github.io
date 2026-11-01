@@ -1,0 +1,10 @@
+Package: amogos-update
+Version: 2.0.0-1
+Section: admin
+Priority: optional
+Architecture: all
+Maintainer: AmogOS
+Depends: dash, coreutils, dpkg
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. The initial migration is a no-op.

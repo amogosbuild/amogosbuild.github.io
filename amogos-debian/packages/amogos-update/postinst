@@ -1,0 +1,22 @@
+#!/bin/sh
+set -eu
+case "$1" in
+    configure)
+        version='@VERSION@'
+        state=/var/lib/amogos-update
+        install -d -m755 "$state"
+        previous=''
+        if [ -f "$state/applied-version" ]; then
+            previous=$(cat "$state/applied-version")
+        fi
+        if [ -z "$previous" ] || dpkg --compare-versions "$version" gt "$previous"; then
+            AMOGOS_UPDATE_FROM="$previous" AMOGOS_UPDATE_TO="$version" /usr/bin/amogos-update
+            temporary=$(mktemp "$state/applied-version.XXXXXX")
+            trap 'rm -f -- "$temporary"' EXIT
+            printf '%s\n' "$version" > "$temporary"
+            chmod 644 "$temporary"
+            mv -f -- "$temporary" "$state/applied-version"
+        fi
+        ;;
+esac
+exit 0
