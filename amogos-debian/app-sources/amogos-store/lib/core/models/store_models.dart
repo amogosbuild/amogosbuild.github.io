@@ -62,6 +62,13 @@ class StorePackage {
 
 enum JobStatus { queued, preparing, running, completed, failed, removed }
 
+class StoreNotification {
+  const StoreNotification(this.message, this.id, {this.showQueue = false});
+  final String message;
+  final int id;
+  final bool showQueue;
+}
+
 class StoreJob {
   StoreJob({
     required this.title,
@@ -79,6 +86,15 @@ class StoreJob {
   bool get pending => status == JobStatus.queued;
   bool get active =>
       status == JobStatus.preparing || status == JobStatus.running;
+  String get activity => operation == 'remove'
+      ? 'Uninstalling'
+      : operation == 'repair'
+      ? 'Repairing'
+      : source == 'refresh'
+      ? 'Refreshing indexes'
+      : operation.startsWith('update') || operation == 'upgrade-system'
+      ? 'Updating'
+      : 'Installing';
 }
 
 String byteSize(num? bytes) {

@@ -85,14 +85,17 @@ def launch(request):
         args=["flatpak","--"+scope,"run",current["reference"]]
     elif source=="deb":
         identity=package_name(request.get("id"))
-        c=apt_catalog.cache()
-        if identity not in c or not c[identity].is_installed:
+        status=run(["dpkg-query","-W","-f="+chr(36)+"{db:Status-Status}",identity],check=False)
+        if status.returncode or status.stdout.strip()!="installed":
             raise StoreError("This package is not installed.")
         files=run(["dpkg-query","-L",identity]).stdout.splitlines()
-        desktop=next((p for p in files if p.startswith("/usr/share/applications/") and p.endswith(".desktop") and pathlib.Path(p).is_file()),None)
+        desktops=[pathlib.Path(p) for p in files if p.startswith("/usr/share/applications/") and p.endswith(".desktop") and pathlib.Path(p).is_file()]
+        desktops.sort(key=lambda p:("NoDisplay=true" in p.read_text(),p.name!=identity+".desktop",p.name))
+        desktop=next(iter(desktops),None)
         if not desktop:
             raise StoreError("This package has no desktop launcher. It may be a command-line tool.")
-        args=["gio","launch",desktop]
+        from . import desktop_launch
+        return desktop_launch.start(identity,desktop)
     else:
         raise StoreError("Unsupported application source.")
     subprocess.Popen(args,stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)

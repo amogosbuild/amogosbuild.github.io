@@ -1,10 +1,10 @@
 Package: amogos-store
-Version: 0.1.4
+Version: 0.1.5
 Section: admin
 Priority: optional
 Architecture: amd64
 Maintainer: AmogOS
-Depends: python3, python3-apt, ca-certificates, libfuse2t64, pkexec, polkitd, xdg-utils, zenity, libgtk-3-0t64, libgl1, libegl1, libstdc++6, qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Depends: python3, python3-apt, python3-gi, gir1.2-glib-2.0, ca-certificates, libfuse2t64, pkexec, polkitd, xdg-utils, zenity, libgtk-3-0t64, libgl1, libegl1, libstdc++6, qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
 Recommends: flatpak, xdg-desktop-portal
 Description: AmogOS App Store and system updates
  Software discovery and installation from APT, Flathub, and AppImageHub,

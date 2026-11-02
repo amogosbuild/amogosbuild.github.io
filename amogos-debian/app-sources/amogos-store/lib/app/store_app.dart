@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import '../core/controllers/store_controller.dart';
 import '../core/services/store_service.dart';
 import '../features/shell/store_shell.dart';
+import '../features/widgets/notification_pill.dart';
+import '../features/queue/queue_dialog.dart';
 import 'store_theme.dart';
 
 class StoreApp extends StatefulWidget {
@@ -18,6 +20,7 @@ class StoreApp extends StatefulWidget {
 
 class _StoreAppState extends State<StoreApp> {
   late final StoreController controller;
+  final navigatorKey = GlobalKey<NavigatorState>();
   @override
   void initState() {
     super.initState();
@@ -39,6 +42,15 @@ class _StoreAppState extends State<StoreApp> {
     child: StoreShell(controller: controller),
     builder: (context, dark, child) => MaterialApp(
       title: 'AmogOS App Store',
+      navigatorKey: navigatorKey,
+      builder: (context, child) => NotificationPillHost(
+        controller: controller,
+        onViewQueue: () {
+          final context = navigatorKey.currentState?.overlay?.context;
+          if (context != null) showQueue(context, controller);
+        },
+        child: child ?? const SizedBox.shrink(),
+      ),
       debugShowCheckedModeBanner: false,
       theme: storeTheme(false),
       darkTheme: storeTheme(true),

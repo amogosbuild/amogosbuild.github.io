@@ -95,7 +95,7 @@ class AppImageIntegration(unittest.TestCase):
             def start(*args,**kwargs):
                 kwargs["stdout"].write(b"error while loading shared libraries: libexample.so: cannot open shared object file\n")
                 return SimpleNamespace(pid=10,wait=Mock(return_value=127))
-            with patch.object(appimage_launch.subprocess,"Popen",side_effect=start):
+            with patch.object(appimage_launch.subprocess,"Popen",side_effect=start),patch("amogos_store.appimage_extract.prepare",return_value=([str(path)],{})):
                 with self.assertRaisesRegex(StoreError,"publisher's AppImage is missing the required library libexample.so"):
                     appimage_launch.start("123",path)
 
@@ -104,11 +104,11 @@ class AppImageIntegration(unittest.TestCase):
             path=state/"app.AppImage"
             path.write_bytes(header())
             def start(*args,**kwargs):
-                if kwargs["env"].get("APPIMAGE_EXTRACT_AND_RUN")=="1":
+                if kwargs["env"].get("APPDIR"):
                     return SimpleNamespace(pid=11,wait=Mock(side_effect=subprocess.TimeoutExpired("app",2.5)))
                 kwargs["stdout"].write(b"fuse: device not found\n")
                 return SimpleNamespace(pid=10,wait=Mock(return_value=1))
-            with patch.object(appimage_launch.subprocess,"Popen",side_effect=start) as launch:
+            with patch.object(appimage_launch.subprocess,"Popen",side_effect=start) as launch,patch("amogos_store.appimage_extract.prepare",return_value=([str(path)],{"APPDIR":str(state/"extracted")})):
                 self.assertTrue(appimage_launch.start("123",path)["launched"])
             self.assertEqual(launch.call_count,2)
 

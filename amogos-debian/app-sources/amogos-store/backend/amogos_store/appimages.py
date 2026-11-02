@@ -9,6 +9,7 @@ import re
 import struct
 import tempfile
 import time
+import shutil
 from . import appimage_catalog, appimage_integration, appimage_launch
 from .network import open_url
 from .runtime import StoreError, emit, user_state
@@ -143,6 +144,11 @@ def remove(key):
     with manifest_lock():
         key,values,path=owned(key)
         path.unlink(missing_ok=True)
+        extracted=path.parent/"extracted"
+        if extracted.is_symlink():
+            extracted.unlink()
+        elif extracted.exists():
+            shutil.rmtree(extracted)
         (pathlib.Path.home()/".local/share/applications"/("amogos-appimage-"+key+".desktop")).unlink(missing_ok=True)
         del values[key]
         save(values)
@@ -151,7 +157,10 @@ def remove(key):
 
 
 def launch(key):
-    key,_,path=owned(key)
+    key,values,path=owned(key)
+    from .appimage_compatibility import BROKEN_SHA256, MESSAGE
+    if values[key].get("sha256") in BROKEN_SHA256:
+        raise StoreError(MESSAGE+" Open this app's details and choose the compatible AppImage.")
     if not path.is_file():
         raise StoreError("The installed AppImage file is missing.")
     reconcile()

@@ -3,6 +3,7 @@ import urllib.parse
 from .network import fetch, image_url, plain
 from .runtime import StoreError
 from .appimage_categories import categories_for, in_category
+from . import appimage_compatibility
 
 API = "https://api.opendesktop.org/ocs/v1"
 
@@ -60,6 +61,8 @@ def downloads(item):
             continue
         if any(v in name.lower() for v in ("aarch64","arm64","armhf","i386","i686")):
             continue
+        if appimage_compatibility.reason(item,index):
+            continue
         values.append(dict(number=index,name=plain(name) or "Application.AppImage",url=url,size=int(item.get("downloadsize"+s) or 0)*1024,md5=item.get("downloadmd5sum"+s,""),version=str(item.get("download_version"+s) or item.get("version","")),architecture=arch or "checked after download"))
     return values
 
@@ -68,4 +71,7 @@ def details(key,current=None):
     raw=raw_details(key)
     item=normalize(raw,current)
     item["downloads"]=[{k:v for k,v in value.items() if k not in ("url","md5")} for value in downloads(raw)]
+    item["compatibilityNotes"]=list(dict.fromkeys(note for index in range(1,101) if (note:=appimage_compatibility.reason(raw,index))))
+    if item["compatibilityNotes"] and not item["downloads"] and str(raw.get("id"))=="2194959":
+        item["replacementId"]="1231861"
     return item

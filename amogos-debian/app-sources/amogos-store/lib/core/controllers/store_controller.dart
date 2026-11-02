@@ -14,6 +14,9 @@ class StoreController extends ChangeNotifier {
   final double shopperRoll;
   StorePage page = StorePage.home;
   final darkTheme = ValueNotifier(true);
+  final notification = ValueNotifier<StoreNotification?>(null);
+  Timer? _notificationTimer;
+  int _notificationId = 0;
   bool get dark => darkTheme.value;
   set dark(bool value) => darkTheme.value = value;
   bool loading = true,
@@ -48,6 +51,22 @@ class StoreController extends ChangeNotifier {
 
   void changed() {
     if (!_disposed) notifyListeners();
+  }
+
+  void showNotification(String message, {bool showQueue = false}) {
+    if (_disposed) return;
+    _notificationTimer?.cancel();
+    notification.value = StoreNotification(
+      message,
+      ++_notificationId,
+      showQueue: showQueue,
+    );
+    _notificationTimer = Timer(const Duration(seconds: 4), dismissNotification);
+  }
+
+  void dismissNotification() {
+    _notificationTimer?.cancel();
+    if (!_disposed) notification.value = null;
   }
 
   Future<void> initialize() => _initialization ??= _initialize();
@@ -256,6 +275,7 @@ class StoreController extends ChangeNotifier {
       throw StateError('This package is already in the queue.');
     }
     queue.add(job);
+    showNotification('${job.title} added to your queue', showQueue: true);
     while (queue.length > 30) {
       final index = queue.indexWhere(
         (value) => !value.pending && !value.active,
@@ -323,7 +343,7 @@ class StoreController extends ChangeNotifier {
         job.status = JobStatus.running;
         changed();
         await for (final event in service.execute(action, body)) {
-          job.message = event['message'] ?? 'Installing';
+          job.message = event['message'] ?? job.activity;
           if (event['progress'] != null) {
             job.progress = (event['progress'] as num).toDouble().clamp(0, 1);
           }
@@ -382,6 +402,8 @@ class StoreController extends ChangeNotifier {
   void dispose() {
     _disposed = true;
     _searchTimer?.cancel();
+    _notificationTimer?.cancel();
+    notification.dispose();
     darkTheme.dispose();
     super.dispose();
   }

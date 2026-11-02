@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/controllers/store_controller.dart';
 import '../../core/models/store_models.dart';
-import '../queue/queue_dialog.dart';
 
 Future<bool> reviewTransaction(
   BuildContext context,
@@ -12,6 +11,7 @@ Future<bool> reviewTransaction(
   required String source,
   required String operation,
   required Map<String, dynamic> request,
+  void Function(String)? onError,
 }) async {
   Map<String, dynamic> review;
   try {
@@ -36,6 +36,10 @@ Future<bool> reviewTransaction(
       review = await c.service.request('$prefix-plan', request);
     }
   } catch (e) {
+    if (onError != null) {
+      onError(StoreController.clean(e));
+      return false;
+    }
     if (context.mounted) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(StoreController.clean(e))));
@@ -46,6 +50,17 @@ Future<bool> reviewTransaction(
   final changes = [
     for (final v in review['changes'] ?? []) Map<String, dynamic>.from(v),
   ];
+  if (changes.isEmpty) {
+    const message =
+        'No package changes are needed. This version is already installed. Use Repair to reinstall an APT application.';
+    if (onError != null) {
+      onError(message);
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text(message)));
+    }
+    return false;
+  }
   final accepted = await showDialog<bool>(
     context: context,
     builder: (context) => AlertDialog(
@@ -188,19 +203,12 @@ Future<bool> reviewTransaction(
         review: review,
       ),
     );
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('$title added to your queue'),
-          action: SnackBarAction(
-            label: 'View queue',
-            onPressed: () => showQueue(context, c),
-          ),
-        ),
-      );
-    }
     return true;
   } catch (e) {
+    if (onError != null) {
+      onError(StoreController.clean(e));
+      return false;
+    }
     if (context.mounted) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(StoreController.clean(e))));

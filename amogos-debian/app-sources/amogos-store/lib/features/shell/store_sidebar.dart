@@ -221,9 +221,9 @@ class StoreSidebar extends StatelessWidget {
                                           const SizedBox(height: 3),
                                           Text(
                                             c.currentJob != null
-                                                ? 'Installing now'
+                                                ? '${c.currentJob!.activity} now'
                                                 : c.waitingCount > 0
-                                                ? 'Waiting to install'
+                                                ? 'Waiting in queue'
                                                 : 'Make room for something new',
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,

@@ -1,0 +1,107 @@
+{
+  "package": "amogos-store",
+  "version": "0.1.5",
+  "osVersion": "2.1",
+  "scope": "App Store only",
+  "isoRebuilt": false,
+  "generatedUtc": "2026-11-02T20:09:49.602643+00:00",
+  "sha256": "73b257f0a5fd50ee84b1b22d2e6dc80449a91c07488ca2ef03a1986956b21797",
+  "bytes": 8389224,
+  "backendTests": 39,
+  "flutterTests": 24,
+  "flutterAnalysis": "passed",
+  "sourceCommentAuditFiles": 97,
+  "linuxReleaseBuild": "passed",
+  "native": {
+    "vlcStoreLaunchFromEmptyDisplay": true,
+    "kritaStoreLaunchFromEmptyDisplay": true,
+    "gimpStoreLaunchFromEmptyDisplay": true,
+    "audacityStoreLaunchFromEmptyDisplay": true,
+    "appimage1231861StoreLaunch": true,
+    "knownBrokenVlcOffersReplacement": true,
+    "packagedStoreWindow": true,
+    "failedLaunchReportsActualError": true
+  },
+  "repositories": {
+    "passed": true,
+    "plans": [
+      {
+        "id": "gimp",
+        "repo": "security.debian.org|stable-security|main",
+        "version": "3.0.4-3+deb13u11",
+        "changes": 70
+      },
+      {
+        "id": "gimp",
+        "repo": "deb.debian.org|stable|main",
+        "version": "3.0.4-3+deb13u10",
+        "changes": 70
+      },
+      {
+        "id": "krita",
+        "repo": "deb.debian.org|stable|main",
+        "version": "1:5.2.9+dfsg-1+deb13u1",
+        "changes": 139
+      },
+      {
+        "id": "krita",
+        "repo": "security.debian.org|stable-security|main",
+        "version": "1:5.2.9+dfsg-1+deb13u1",
+        "changes": 139
+      },
+      {
+        "id": "audacity",
+        "repo": "deb.debian.org|stable|main",
+        "version": "3.7.3+dfsg-1",
+        "changes": 17
+      }
+    ],
+    "gimpMainThenSecurityInstalled": true,
+    "gimpRemoval": true,
+    "noBrokenPackages": true
+  },
+  "repairs": [
+    "gimp",
+    "vlc",
+    "krita",
+    "audacity"
+  ],
+  "notifications": {
+    "placement": "bottom center above pages and dialogs",
+    "dismissAfterSeconds": 4,
+    "oldNoticesReplaced": true,
+    "widthsTested": [
+      400,
+      1280
+    ]
+  },
+  "appimageFuseFallback": true,
+  "knownBrokenVlcReplacement": "1231861",
+  "selfUpgrade": {
+    "passed": true,
+    "fromVersion": "0.1.4",
+    "toVersion": "0.1.5",
+    "method": "old App Store apt-plan and apt-apply",
+    "changedPackages": [
+      "amogos-store"
+    ],
+    "osIdentityUnchanged": true
+  },
+  "archiveValidation": {
+    "passed": true,
+    "packages": 15,
+    "signingFingerprint": "AD0DEB95462DBF4C6C4F3A5571447013FAF2C774",
+    "verifiedSignatures": [
+      "InRelease",
+      "Release.gpg"
+    ],
+    "byHash": true,
+    "sourcePackagesMatch": true,
+    "catalogLinks": true
+  },
+  "repositoryTests": "passed",
+  "visualInspection": [
+    "notification-pill-400.png",
+    "notification-pill-1280.png"
+  ]
+}

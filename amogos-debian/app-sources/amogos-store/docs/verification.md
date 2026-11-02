@@ -88,3 +88,18 @@ WM_CLASS. The installed inventory matched all 904 dpkg-installed packages in
 the isolated build environment and all four system Flatpak runtimes. Real user
 Flatpak install, selected update and removal passed with a private test D-Bus.
 The updated DEB is staged in the editable rootfs. No ISO was rebuilt.
+
+## App Store 0.1.5
+
+This is an App Store-only release for AmogOS 2.1. Other AmogOS packages and the ISO are unchanged.
+
+- Repository preferences now cover only binaries built from the selected source package. Real GIMP installation passed from Debian main followed by the security repository; removal and dpkg audit also passed. Plans for both GIMP and Krita repositories and Audacity passed on a fresh 2.1 target. Unrelated dependency security versions retain their normal APT policy.
+- Repair explicitly reviews a reinstall plus missing recommended dependencies. Actual repairs passed for GIMP, VLC, Krita and Audacity.
+- Native launches use GIO desktop entry handling and save early errors instead of discarding output. They query dpkg directly rather than allocating an APT cache. Missing display endpoints can be recovered from the current user's desktop session; inherited Qt plugin search paths are removed for the child process.
+- Real windows opened for VLC, Krita and Audacity under KWin/XWayland and GIMP under native Wayland, with the launcher's DISPLAY deliberately empty and an invalid inherited QT_PLUGIN_PATH.
+- Portable VLC AppImageHub listing 1231861 opened with FUSE deliberately unavailable. The fallback extracts with bounded memory and reuses the AppDir until the download changes.
+- Both current artifacts in unofficial VLC listing 2194959 are incompatible: the first omits libvlc.so.5, and the second cannot load its graphical interface on Debian. Their exact published checksums are withheld, and installed copies offer the portable replacement. Future uploads with different checksums are not blocked.
+- Failed package reviews and empty transactions provide visible feedback. Installed AppImages allow a reviewed reinstall or build change. Uninstalling, updating and repairing have distinct queue labels.
+- Queue confirmations use a bottom-centred root-layer pill above pages and dialogs. It replaces the previous notice, has View queue and dismiss actions, and expires after four seconds without waiting for navigation or focus. Widget tests verify placement and interaction at widths 400 and 1280 and prove timer replacement and dismissal.
+
+Release checks: 39 backend tests, 24 Flutter tests, clean Flutter analysis, one-comment source audit, Linux release build, isolated real APT transactions and Plasma launch checks. Package and archive verification are recorded in the published release report.

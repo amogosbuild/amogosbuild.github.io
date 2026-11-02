@@ -122,7 +122,10 @@ class _PackageDetailsState extends State<PackageDetails> {
   }
 
   Future<void> operate(String operation) async {
-    setState(() => busy = true);
+    setState(() {
+      busy = true;
+      error = null;
+    });
     final build = selected.downloads
         .where((v) => v['number'] == download)
         .firstOrNull;
@@ -143,10 +146,29 @@ class _PackageDetailsState extends State<PackageDetails> {
       source: selected.source,
       operation: operation,
       request: request,
+      onError: (message) {
+        if (mounted) setState(() => error = message);
+      },
     );
     if (mounted) {
       setState(() => busy = false);
-      if (accepted) Navigator.pop(context);
+      if (accepted) {
+        Navigator.pop(context);
+      } else if (error != null) {
+        await showDialog<void>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Package changes could not be prepared'),
+            content: SingleChildScrollView(child: SelectableText(error!)),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        );
+      }
     }
   }
 
@@ -444,6 +466,30 @@ class _PackageDetailsState extends State<PackageDetails> {
                         padding: const EdgeInsets.only(top: 16),
                         child: StoreNotice(error!),
                       ),
+                    for (final note
+                        in selected.data['compatibilityNotes'] ?? [])
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: StoreNotice(note.toString()),
+                      ),
+                    if (selected.data['replacementId'] != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: OutlinedButton.icon(
+                          onPressed: busy || detailLoading
+                              ? null
+                              : () => loadDetails(
+                                  StorePackage({
+                                    'id': selected.data['replacementId'],
+                                    'source': 'appimage',
+                                    'repo': 'appimagehub',
+                                    'name': 'VLC Media Player',
+                                  }),
+                                ),
+                          icon: const Icon(Icons.swap_horiz_rounded),
+                          label: const Text('Choose compatible VLC AppImage'),
+                        ),
+                      ),
                     if (unavailable && !detailLoading)
                       const Padding(
                         padding: EdgeInsets.only(top: 16),
@@ -526,6 +572,30 @@ class _PackageDetailsState extends State<PackageDetails> {
                 overflowSpacing: 8,
                 alignment: MainAxisAlignment.end,
                 children: [
+                  if (busy)
+                    const Padding(
+                      padding: EdgeInsets.only(right: 10),
+                      child: Text('Preparing package review…'),
+                    ),
+                  if (selected.installed && selected.source == 'deb')
+                    TextButton.icon(
+                      onPressed: busy || detailLoading
+                          ? null
+                          : () => operate('repair'),
+                      icon: const Icon(Icons.build_outlined, size: 18),
+                      label: const Text('Repair'),
+                    ),
+                  if (selected.installed &&
+                      selected.source == 'appimage' &&
+                      !unavailable &&
+                      selected.downloads.isNotEmpty)
+                    TextButton.icon(
+                      onPressed: busy || detailLoading
+                          ? null
+                          : () => operate('repair'),
+                      icon: const Icon(Icons.build_outlined, size: 18),
+                      label: const Text('Reinstall / change build'),
+                    ),
                   if (selected.installed && !selected.runtime)
                     TextButton.icon(
                       onPressed: busy ? null : () => operate('remove'),

@@ -117,7 +117,9 @@ class StoreService {
         yield {
           'message': i == 20
               ? 'Preview finished. No packages were changed.'
-              : 'Previewing package installation…',
+              : body['operation'] == 'remove' || action == 'appimage-remove'
+              ? 'Previewing package removal…'
+              : 'Previewing package changes…',
           'progress': i / 20,
           'done': i == 20,
         };

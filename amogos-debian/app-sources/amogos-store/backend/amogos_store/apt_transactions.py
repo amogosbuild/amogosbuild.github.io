@@ -6,7 +6,7 @@ from .runtime import StoreError, consume_plan, digest, emit, package_name, save_
 def resolve(request):
     c=apt_catalog.cache()
     action=request.get("operation","install")
-    if action not in ("install","remove","update","update-selected","upgrade-system"):
+    if action not in ("install","repair","remove","update","update-selected","upgrade-system"):
         raise StoreError("Unsupported Debian package operation.")
     package=request.get("id","")
     if action=="upgrade-system":
@@ -40,10 +40,8 @@ def resolve(request):
                 raise StoreError("This package has no trusted repository origin.")
             repo=request.get("repo","")
             if repo and hasattr(c,"_depcache"):
-                _,archive,component=repo.split("|",2)
-                c._depcache.policy.create_pin("Release","","a="+archive+",c="+component,990)
-                c._depcache.policy.init_defaults()
-                c._depcache.init()
+                from .apt_resolution import prefer_family
+                prefer_family(c,version,repo)
             p.candidate=version
             p.mark_install(auto_fix=True,auto_inst=True,from_user=True)
             if not p.installed or p.installed.version!=version.version:
@@ -52,7 +50,10 @@ def resolve(request):
     if c.broken_count:
         raise StoreError("APT could not resolve this transaction. Repair the package state before continuing.")
     changes=[]
-    for p in c.get_changes():
+    changed=list(c.get_changes())
+    if action=="repair" and c[package].installed and not any(p.name==package for p in changed):
+        changed.append(c[package])
+    for p in changed:
         candidate=p.candidate
         remove=p.marked_delete
         if remove and (p.essential or p.name in PROTECTED):
@@ -63,11 +64,12 @@ def resolve(request):
             import apt_pkg
             if apt_pkg.version_compare(candidate.version,p.installed.version)<0:
                 raise StoreError("This repository would downgrade an installed package. Choose a newer version or repository.")
-        changes.append(dict(id=p.name, action="remove" if remove else "install" if not p.installed else "update", fromVersion=p.installed.version if p.installed else "", version="" if remove else candidate.version, size=0 if remove else candidate.size, automatic=bool(p.is_auto_installed)))
+        changes.append(dict(id=p.name, action="remove" if remove else "install" if not p.installed else "reinstall" if action=="repair" and p.name==package else "update", fromVersion=p.installed.version if p.installed else "", version="" if remove else candidate.version, size=0 if remove else candidate.size, automatic=bool(p.is_auto_installed)))
     changes.sort(key=lambda x:x["id"])
     installed=[(p.name,p.installed.version) for p in c if p.installed]
     signature=digest(dict(changes=changes,installed=sorted(installed)))
-    return dict(source="deb",operation=action,id=package,packages=selected if action=="update-selected" else [],repo=request.get("repo",""),changes=changes,downloadBytes=c.required_download,spaceBytes=c.required_space,fingerprint=signature,summary="Update AmogOS 2 Pro" if action=="upgrade-system" else "Update selected APT packages" if action=="update-selected" else action.capitalize()+" "+package,note="The review includes dependencies required by your selected packages." if action=="update-selected" else "")
+    download=max(c.required_download,sum(v["size"] for v in changes if v["action"]=="reinstall"))
+    return dict(source="deb",operation=action,id=package,packages=selected if action=="update-selected" else [],repo=request.get("repo",""),changes=changes,downloadBytes=download,spaceBytes=c.required_space,fingerprint=signature,summary="Update AmogOS 2 Pro" if action=="upgrade-system" else "Update selected APT packages" if action=="update-selected" else action.capitalize()+" "+package,note="The review includes dependencies required by your selected packages." if action=="update-selected" else "")
 
 
 PROTECTED={"amogos-system","amogos-update","amogos-store","amogos-installer","apt","dpkg","systemd","systemd-sysv","libc6","sudo","polkitd","pkexec","linux-image-amd64","grub-pc-bin","grub-efi-amd64-bin","grub2-common","sddm","plasma-desktop"}
@@ -109,6 +111,8 @@ def apply(request):
             raise StoreError("This upgrade is unusually large. Use a terminal package manager.")
         from .runtime import run
         flags=[] if any(v["action"]=="remove" for v in current["changes"]) else ["--no-remove"]
+        if any(v["action"]=="reinstall" for v in current["changes"]):
+            flags.append("--reinstall")
         stream(["apt-get","-y",*flags,"--install-recommends","-o","Dpkg::Options::=--force-confold","-o","Dpkg::Use-Pty=0","-o","DPkg::Progress-Fancy=0","-o","APT::Status-Fd={status_fd}","install",*packages])
         automatic=[v["id"] for v in current["changes"] if v["action"]!="remove" and v["automatic"]]
         if automatic:

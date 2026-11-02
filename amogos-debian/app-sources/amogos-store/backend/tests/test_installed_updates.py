@@ -53,7 +53,7 @@ class InstalledUpdates(unittest.TestCase):
         self.assertEqual((values[0]["scope"],values[0]["fromVersion"],values[0]["version"]),("user","1","2"))
 
     def test_selected_apt_plan_only_marks_requested_packages_and_preserves_automatic(self):
-        chosen=package("chosen");chosen.installed=version("1");chosen.candidate=version("2");chosen.essential=False;chosen.marked_delete=False;chosen.is_auto_installed=True
+        chosen=package("chosen");chosen.installed=version("1");chosen.candidate=version("2");chosen.essential=False;chosen.marked_delete=False;chosen.marked_reinstall=False;chosen.is_auto_installed=True
         touched=[]
         chosen.mark_install=lambda **kwargs:touched.append(kwargs)
         unrelated=package("unrelated");unrelated.installed=unrelated.candidate
@@ -74,6 +74,18 @@ class InstalledUpdates(unittest.TestCase):
         self.assertEqual(value["flatpak"][0]["id"],"org.test.App")
         self.assertEqual(value["appimage"][0]["id"],"123")
         self.assertEqual(value["warnings"][0]["source"],"deb")
+
+    def test_repair_reviews_reinstall_even_when_apt_marks_the_version_keep(self):
+        import apt_pkg
+        apt_pkg.init_system()
+        chosen=package("chosen");chosen.installed=chosen.candidate;chosen.essential=False;chosen.marked_delete=False;chosen.is_auto_installed=False
+        chosen.mark_install=lambda **kwargs:None
+        c=Cache({chosen.name:chosen});c.broken_count=0;c.required_download=0;c.required_space=0;c.get_changes=lambda:[]
+        with patch.object(apt_catalog,"cache",return_value=c):
+            value=apt_transactions.resolve(dict(operation="repair",id="chosen"))
+        self.assertEqual(value["changes"][0]["action"],"reinstall")
+        self.assertEqual(value["changes"][0]["id"],"chosen")
+        self.assertEqual(value["downloadBytes"],10)
 
     def test_appimage_update_retains_selected_build_and_avoids_downgrades(self):
         current={"123":dict(name="App",version="2.0",download=2)}
