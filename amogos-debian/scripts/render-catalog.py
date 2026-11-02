@@ -5,7 +5,7 @@ from urllib.parse import quote
 from archive import ROOT, write
 
 manifest = json.loads((ROOT / "repository.json").read_text())
-commands = {"amogos-installer": "amogos-installer", "amogos-store": "amogos-appstore", "amogos-music": "amogos-music", "amogos-notes": "amogos-notes", "amogos-update": "amogos-update", "amogos-archive-keyring": "APT signing key and source"}
+commands = {"amogos-installer": "amogos-installer", "amogos-store": "amogos-appstore", "amogos-music": "amogos-music", "amogos-notes": "amogos-notes", "amogos-update": "amogos-update", "amogos-system": "Persistent boot theme and system policy", "amogos-archive-keyring": "APT signing key and source"}
 rows, markdown = [], ["# Available packages", "", "Generated from the archive metadata. All application DEBs target Debian 13 amd64.", "", "| Package | Version | Architecture | Command or purpose | Download |", "| --- | --- | --- | --- | --- |"]
 for package in manifest["packages"]:
     name, version, architecture = package["package"], package["version"], package["architecture"]
@@ -36,7 +36,7 @@ body{max-width:1100px;margin:auto;padding:36px 24px 60px;line-height:1.6}a{color
 less install.sh
 sudo sh install.sh</code></pre><p>Then install an app, for example:</p><pre><code>sudo apt install amogos-notes amogos-music amogos-store</code></pre><p>The repository adds AmogOS packages alongside your Debian repositories. The installer is available as <code>amogos-installer</code> for live installation media.</p></section>
 <section id="packages"><h2>Available packages</h2><div class="table-wrap"><table><thead><tr><th scope="col">Package</th><th scope="col">Version</th><th scope="col">Architecture</th><th scope="col">Command or purpose</th><th scope="col">Download</th></tr></thead><tbody>@ROWS@</tbody></table></div><p>APT verifies signed indexes and package checksums. <a href="SHA256SUMS">SHA-256 checksums</a> are also available for direct downloads.</p></section>
-<section><h2>System update migrations</h2><p><code>amogos-update</code> currently does nothing. When a newer package version is installed during an OS update, its new script runs automatically. Successful versions are recorded so reinstalls do not repeat them; failed migrations remain pending.</p></section>
+<section><h2>System update migrations</h2><p>The 2.1 update repairs Debian package support, upgrades the App Store and removes live installers from installed systems. Systems already on 2.1 or newer report that they are up to date. When a newer package version is installed during an OS update, its new script runs automatically. Successful versions are recorded so reinstalls do not repeat them; failed migrations remain pending.</p></section>
 <section><h2>Archive signing key</h2><p class="fingerprint"><code>@FINGERPRINT@</code></p><p><a href="keyrings/amogos-archive-keyring.asc">Public key</a> · <a href="dists/stable/InRelease">Signed Release</a> · <a href="repository.json">Package metadata</a></p></section>
 </main><footer>The Arch project remains reserved for future work. These packages target AmogOS 2 Pro and Debian 13 amd64.</footer>
 </body>

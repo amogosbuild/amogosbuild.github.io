@@ -1,0 +1,10 @@
+# Lint the installer and the adapted music resolver.
+include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    implementation_imports: ignore
+    deprecated_member_use: ignore
+  exclude:
+    - build/**
+    - windows/**
+    - linux/**

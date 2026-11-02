@@ -5,24 +5,24 @@ Origin: AmogOS
 Label: AmogOS 2 Pro
 Suite: stable
 Codename: chocolatier
-Version: 2.0
-Date: Sun, 01 Nov 2026 18:22:12 +0000
+Version: 2.1
+Date: Sun, 01 Nov 2026 23:47:18 +0000
 Architectures: amd64
 Components: main
 Acquire-By-Hash: yes
 Description: AmogOS 2 Pro applications and versioned system updates for Debian 13
 SHA256:
- 679bcfaba67af392ee33af624c7a0c49fcc67525bf23318986dc9bf3bd0c1788 7758 main/binary-amd64/Packages
- 20b40ed96276f6ddce669a676242ad8cd3c849461ea1924e4f6938624e221be7 2265 main/binary-amd64/Packages.gz
- 2a76a255e1dd0d36defe02b66bbe265472ef9946f11cc27e1415c7ee256a576a 2256 main/binary-amd64/Packages.xz
+ 5b749874dde851cad888a8beff0bdd235769ae83fef7290fb4eac95c31bd6e81 11089 main/binary-amd64/Packages
+ 46d34eb43f7458e060815292ab9fecb0c126756849314c653db025c102b2d155 2957 main/binary-amd64/Packages.gz
+ efd7dad3fc830e77d08353c634e3d5b131de01f52f4cc6581fb3ae43c56811bf 2892 main/binary-amd64/Packages.xz
 SHA512:
- 915d60013deb6ef95154528714aa9c15ae03078de6fbdb0678103986670611983df5d50c91bdf71a148ddb3b1877cd71673a1a5bb8851b7077357085cbf636d7 7758 main/binary-amd64/Packages
- 3ea2b8383384de1b2bdd0cc3b5f8216907069dab1d617c104e0c296f2207765747e29623df14ea565bf2e83fb05fd30509d017f5440b1527aa6a0f51790a30c8 2265 main/binary-amd64/Packages.gz
- 789be7b3541c2586c269a298745822fd85e191e4694cd6645063ef50c34b97ed87d23548e5fe6ebad56569a2021c6749cca12c984b98b61948fb21e85a2f6878 2256 main/binary-amd64/Packages.xz
+ 96c688a057404b76e0ecc67940c286b834c2d714022790b580043e202c8b07df627d013b3ec7b478828f4631a46c09d5415029e316a7eb21dfff89b96545da75 11089 main/binary-amd64/Packages
+ 2c486a7384b68eb5843b7936bc26919d66c167c1d392022da893cf6867cdbd73279307a004d96a59beddced8a6f635501f7c40f0c29d7899ae6a63c6c9ee2dfb 2957 main/binary-amd64/Packages.gz
+ ba3fef43bfa9815e50c76fe1963959b8be9a371deb51013fe2c80711f90fba6918dad0a62a519dacc65ac6fc4bf6b75997e94c51cf4ade46697809b864d95736 2892 main/binary-amd64/Packages.xz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYIAB0WIQStDeuVRi2/TGxPOlVxRHAT+vLHdAUCaueDVAAKCRBxRHAT+vLH
-dJ9UAQDIsboYXlOEtul56WAfCpzTN8fc5r4JmsskhwJp4OZvLAEAw0JRmZTLOPZm
-2MUZhP0IUCfn/VrCL4tfiI8/QmMJvwc=
-=EDPr
+iHUEARYIAB0WIQStDeuVRi2/TGxPOlVxRHAT+vLHdAUCaufPhgAKCRBxRHAT+vLH
+dItrAP9KLi3BXwZ8br+a7FJLcpBMDSLZbYLP1QEmgxuej1sbFgEA3DIADPh+gyYa
+NW8ppZyn6xiEPOVoa5B5ADEbrbmXngI=
+=z99m
 -----END PGP SIGNATURE-----

@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/lib/amogos-installer/app/amogos_installer "$@"

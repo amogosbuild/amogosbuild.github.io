@@ -1,0 +1,3 @@
+# Keep boot-image generation bounded in memory during installation and system updates.
+COMPRESS=gzip
+COMPRESSLEVEL=1

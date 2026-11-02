@@ -1,0 +1,28 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Origin: AmogOS
+Label: AmogOS 2 Pro
+Suite: stable
+Codename: chocolatier
+Version: 2.0
+Date: Sun, 01 Nov 2026 18:22:12 +0000
+Architectures: amd64
+Components: main
+Acquire-By-Hash: yes
+Description: AmogOS 2 Pro applications and versioned system updates for Debian 13
+SHA256:
+ 679bcfaba67af392ee33af624c7a0c49fcc67525bf23318986dc9bf3bd0c1788 7758 main/binary-amd64/Packages
+ 20b40ed96276f6ddce669a676242ad8cd3c849461ea1924e4f6938624e221be7 2265 main/binary-amd64/Packages.gz
+ 2a76a255e1dd0d36defe02b66bbe265472ef9946f11cc27e1415c7ee256a576a 2256 main/binary-amd64/Packages.xz
+SHA512:
+ 915d60013deb6ef95154528714aa9c15ae03078de6fbdb0678103986670611983df5d50c91bdf71a148ddb3b1877cd71673a1a5bb8851b7077357085cbf636d7 7758 main/binary-amd64/Packages
+ 3ea2b8383384de1b2bdd0cc3b5f8216907069dab1d617c104e0c296f2207765747e29623df14ea565bf2e83fb05fd30509d017f5440b1527aa6a0f51790a30c8 2265 main/binary-amd64/Packages.gz
+ 789be7b3541c2586c269a298745822fd85e191e4694cd6645063ef50c34b97ed87d23548e5fe6ebad56569a2021c6749cca12c984b98b61948fb21e85a2f6878 2256 main/binary-amd64/Packages.xz
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYIAB0WIQStDeuVRi2/TGxPOlVxRHAT+vLHdAUCaueDVAAKCRBxRHAT+vLH
+dJ9UAQDIsboYXlOEtul56WAfCpzTN8fc5r4JmsskhwJp4OZvLAEAw0JRmZTLOPZm
+2MUZhP0IUCfn/VrCL4tfiI8/QmMJvwc=
+=EDPr
+-----END PGP SIGNATURE-----

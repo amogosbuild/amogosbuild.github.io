@@ -1,0 +1,11 @@
+Package: amogos-system
+Version: 2.1.0-1
+Section: admin
+Priority: optional
+Architecture: all
+Maintainer: AmogOS
+Depends: plymouth, initramfs-tools, python3, fonts-dejavu-core
+Replaces: amogos-installer (<< 0.1.5)
+Description: Persistent AmogOS boot theme and system defaults
+ Retains the boot animation and low-memory system configuration after the
+ live-session installation tools have been removed.

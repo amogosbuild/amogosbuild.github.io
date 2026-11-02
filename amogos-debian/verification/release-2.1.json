@@ -1,0 +1,93 @@
+{
+  "release": "2.1",
+  "verifiedUtc": "2026-11-02T00:03:41.339054+00:00",
+  "packages": {
+    "updater": "2.1.0-1",
+    "system": "2.1.0-1",
+    "store": "0.1.4",
+    "installer": "0.1.5"
+  },
+  "tests": {
+    "storeBackend": 32,
+    "installerBackend": 37,
+    "storeFlutter": 17,
+    "installerFlutter": 19,
+    "flutterAnalysis": "passed",
+    "commentAudit": "passed",
+    "signedArchive": "passed",
+    "signedAptOldToNewUpgrade": "passed",
+    "corruptedDownloadRejected": true,
+    "currentAndFutureVersionNoChanges": [
+      "2.1",
+      "2.1.1",
+      "2.2",
+      "3.0"
+    ]
+  },
+  "catalogPackages": 103629,
+  "memory": {
+    "catalog": {
+      "beforePeakRssKiB": 263048,
+      "afterPeakRssKiB": 149540
+    },
+    "sources": {
+      "beforePeakRssKiB": 124628,
+      "afterPeakRssKiB": 117016
+    },
+    "installed": {
+      "beforePeakRssKiB": 161952,
+      "afterPeakRssKiB": 127700
+    }
+  },
+  "native": {
+    "vlcX11": true,
+    "kritaX11": true,
+    "kateX11": true,
+    "vlcPlasmaWaylandXWayland": true,
+    "kritaPlasmaWaylandXWayland": true,
+    "katePlasmaWaylandWithoutDisplay": true,
+    "storeWindowVisible": true,
+    "storePeakRssKiB": 184912,
+    "storeWithHelpersPeakRssKiB": 184912,
+    "storeSampleSeconds": 45,
+    "themingFilesUnchanged": 106,
+    "rebuiltInitramfsHasTheme": true,
+    "version": "2.1",
+    "repeatNoChanges": true,
+    "mainAndSecurityVisible": true,
+    "mainRepoDependencyPlan": true,
+    "storeInstalls": [
+      "vlc",
+      "krita",
+      "kate"
+    ],
+    "noBrokenPackages": true,
+    "installersRemoved": true,
+    "persistentBootTheme": true
+  },
+  "offlineInstaller": {
+    "passed": true,
+    "online": false,
+    "coreCopiedOffline": true,
+    "installersRemoved": true,
+    "themeFilesUnchanged": 106,
+    "initramfsThemePresent": true,
+    "noBrokenPackages": true,
+    "allUpdatesVerified": false,
+    "permanentRepositoryPreserved": true
+  },
+  "onlineInstaller": {
+    "passed": true,
+    "online": true,
+    "coreCopiedOffline": true,
+    "installersRemoved": true,
+    "themeFilesUnchanged": 106,
+    "initramfsThemePresent": true,
+    "noBrokenPackages": true,
+    "allUpdatesVerified": true,
+    "permanentRepositoryPreserved": true,
+    "baseFilesReinstallPreservedIdentity": true
+  },
+  "embeddedSystemPackageMatchesArchive": true,
+  "isoRebuilt": false
+}

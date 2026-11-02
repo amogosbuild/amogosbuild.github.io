@@ -65,13 +65,13 @@ for paragraph in index.decode("utf-8").strip().split("\n\n"):
     require(identity not in identities, "Duplicate package version")
     identities.add(identity)
     records.append(dict(package=item["Package"], version=item["Version"], architecture=item["Architecture"], filename=str(path), bytes=package.stat().st_size, sha256=item["SHA256"]))
-required = {"amogos-installer", "amogos-store", "amogos-music", "amogos-notes", "amogos-update", "amogos-archive-keyring"}
+required = {"amogos-installer", "amogos-store", "amogos-music", "amogos-notes", "amogos-system", "amogos-update", "amogos-archive-keyring"}
 require(required.issubset({item["package"] for item in records}), "An AmogOS package is missing")
 manifest = json.loads((ROOT / "repository.json").read_text())
 require(manifest["signingFingerprint"] == fingerprint, "Manifest signer mismatch")
 require(sorted(manifest["packages"], key=lambda p:p["filename"]) == sorted(records, key=lambda p:p["filename"]), "Repository manifest is stale")
 with tempfile.TemporaryDirectory(prefix="amogos-source-check-") as temporary:
-    for name in ("amogos-update", "amogos-archive-keyring"):
+    for name in ("amogos-system", "amogos-update", "amogos-archive-keyring"):
         package = build_package(ROOT / "packages" / name, temporary, public_key=keyring.read_bytes())
         match = next((item for item in records if pathlib.Path(item["filename"]).name == package.name), None)
         require(match is not None and package_contents(package) == package_contents(ROOT / match["filename"]), "Rebuild the changed source package: " + name)

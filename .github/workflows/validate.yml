@@ -19,3 +19,5 @@ jobs:
         run: python3 amogos-debian/tests/test-apt.py
       - name: Test updater install, upgrade, retry and purge
         run: sudo python3 amogos-debian/tests/test-updater.py
+      - name: Test version guards and identity migration
+        run: python3 amogos-debian/tests/test-migration.py

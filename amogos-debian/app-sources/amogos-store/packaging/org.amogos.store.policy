@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only the installed fixed-action store helper receives system package authorization. -->
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>AmogOS</vendor>
+  <action id="org.amogos.store.manage">
+    <description>Manage AmogOS applications and system updates</description>
+    <message>Authentication is required to change system packages or Flatpaks.</message>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/amogos-store-helper</annotate>
+  </action>
+</policyconfig>

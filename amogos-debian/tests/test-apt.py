@@ -12,9 +12,11 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "scripts"))
 from archive import ROOT, sha256
 
 manifest = json.loads((ROOT / "repository.json").read_text())
-updater = next(item for item in manifest["packages"] if item["package"] == "amogos-update")
+updater = next(item for item in manifest["packages"] if item["package"] == "amogos-update" and item["version"] == "2.1.0-1")
 requests = []
 tamper = False
+previous_release = True
+old_release = (ROOT/'tests/fixtures/amogos-2.0.InRelease').read_bytes()
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -23,7 +25,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         requests.append(self.path)
-        if tamper and self.path.endswith(".deb"):
+        if self.path.endswith('/InRelease'):
+            body=old_release if previous_release else (ROOT/'dists/stable/InRelease').read_bytes()
+            self.send_response(200)
+            self.send_header('Content-Length',str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+        elif tamper and self.path.endswith(".deb"):
             body = b"corrupted test download"
             self.send_response(200)
             self.send_header("Content-Length", str(len(body)))
@@ -47,6 +55,9 @@ try:
         (temporary / "etc/sources.list").write_text(source)
         status = pathlib.Path("/var/lib/dpkg/status").read_text()
         status = "\n\n".join(p for p in status.split("\n\n") if not p.startswith("Package: amogos-update\n"))
+        for name in ("amogos-system", "amogos-store", "qtwayland5", "qt6-wayland", "xwayland", "xauth", "libxcb-cursor0", "python3-apt"):
+            status = "\n\n".join(p for p in status.split("\n\n") if not p.startswith("Package: " + name + "\n"))
+            status += "\n\nPackage: " + name + "\nStatus: install ok installed\nArchitecture: all\nVersion: 9999\nMaintainer: Test\nDescription: Dependency fixture\n\n"
         status += "\n\nPackage: amogos-update\nStatus: install ok installed\nArchitecture: all\nVersion: 2.0.0-0\nMaintainer: Test\nDescription: Older installed fixture\n\n"
         (temporary / "state/status").write_text(status)
         configuration = temporary / "apt.conf"
@@ -56,6 +67,8 @@ try:
             if (result.returncode == 0) != success:
                 raise RuntimeError(result.stdout)
             return result.stdout
+        apt("-o", "APT::Update::Error-Mode=any", "update")
+        previous_release = False
         apt("-o", "APT::Update::Error-Mode=any", "update")
         if not any("/by-hash/" in request for request in requests):
             raise RuntimeError("APT did not fetch an immutable index")

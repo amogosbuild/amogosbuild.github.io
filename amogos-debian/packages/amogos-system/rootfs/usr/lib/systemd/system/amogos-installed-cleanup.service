@@ -1,0 +1,14 @@
+# Installation tools belong to the live session, while the system package retains the boot theme.
+[Unit]
+Description=Remove AmogOS live installation tools from the installed system
+After=local-fs.target
+Before=display-manager.service
+ConditionPathExists=!/run/amogos-install-target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/amogos-installed-cleanup
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target

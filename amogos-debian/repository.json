@@ -4,7 +4,7 @@
   "codename": "chocolatier",
   "supportedSystem": "Debian 13 amd64",
   "signingFingerprint": "AD0DEB95462DBF4C6C4F3A5571447013FAF2C774",
-  "generatedUtc": "2026-11-01T18:22:12.340614+00:00",
+  "generatedUtc": "2026-11-01T23:47:18.506202+00:00",
   "packages": [
     {
       "package": "amogos-archive-keyring",
@@ -47,6 +47,14 @@
       "sha256": "74091477dacaba7cd626ec7812816b9fe6b9f8fa122ae5ac98ed39c40761d8ee"
     },
     {
+      "package": "amogos-installer",
+      "version": "0.1.5",
+      "architecture": "amd64",
+      "filename": "pool/main/a/amogos-installer/amogos-installer_0.1.5_amd64.deb",
+      "bytes": 7964060,
+      "sha256": "c9eb9e3f67946e697884c2d904201db079d71b35cc777b3222ade324d5953161"
+    },
+    {
       "package": "amogos-music",
       "version": "1.0.20~alpha2022",
       "architecture": "amd64",
@@ -71,12 +79,36 @@
       "sha256": "2407b0457f29974f8a0f5b3e9e0d008992bdb10f5d852b7b9de07a251b811deb"
     },
     {
+      "package": "amogos-store",
+      "version": "0.1.4",
+      "architecture": "amd64",
+      "filename": "pool/main/a/amogos-store/amogos-store_0.1.4_amd64.deb",
+      "bytes": 8384652,
+      "sha256": "523773c5f4acf8a4cbde1a611c08e32aaac5d0ce689e00fcb9d0499403d1856c"
+    },
+    {
+      "package": "amogos-system",
+      "version": "2.1.0-1",
+      "architecture": "all",
+      "filename": "pool/main/a/amogos-system/amogos-system_2.1.0-1_all.deb",
+      "bytes": 32438,
+      "sha256": "343a70af6678076e48c18b165414d02e7ba1d7662d7fd6a284fbfc5a1c018f1a"
+    },
+    {
       "package": "amogos-update",
       "version": "2.0.0-1",
       "architecture": "all",
       "filename": "pool/main/a/amogos-update/amogos-update_2.0.0-1_all.deb",
       "bytes": 1072,
       "sha256": "5a0ff25513cde8690dfe2318201ef2e7be26fda8e60799402385934f85cab2c3"
+    },
+    {
+      "package": "amogos-update",
+      "version": "2.1.0-1",
+      "architecture": "all",
+      "filename": "pool/main/a/amogos-update/amogos-update_2.1.0-1_all.deb",
+      "bytes": 7422,
+      "sha256": "91a98252d5cccbd96f93876c9e52dc3e7e7982b81738d1c08378a9767175b44a"
     }
   ]
 }

@@ -1,0 +1,11 @@
+# AmogOS desktop software center and system updates.
+[Desktop Entry]
+Type=Application
+Name=AmogOS App Store
+Comment=Discover applications and update AmogOS 2 Pro
+Exec=/usr/bin/amogos-appstore
+Icon=amogos.appstore
+Terminal=false
+Categories=System;PackageManager;
+Keywords=Apps;Software;Updates;Flatpak;AppImage;APT;
+StartupWMClass=amogos.appstore

@@ -16,6 +16,8 @@ case "$1" in
             printf '%s\n' "$version" > "$temporary"
             chmod 644 "$temporary"
             mv -f -- "$temporary" "$state/applied-version"
+        else
+            printf '%s\n' 'You are already on the latest AmogOS version'
         fi
         ;;
 esac

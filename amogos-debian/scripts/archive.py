@@ -59,6 +59,8 @@ def build_package(source, destination, public_key=None, version=None, payload=No
             write(stage / "usr/bin/amogos-update", payload if payload is not None else (source / "amogos-update").read_text(), 0o755)
             for script in ("postinst", "postrm"):
                 write(stage / "DEBIAN" / script, (source / script).read_text().replace("@VERSION@", version), 0o755)
+        elif name == "amogos-system":
+            write(stage / "DEBIAN/postinst", (source / "postinst").read_text(), 0o755)
         elif name == "amogos-archive-keyring":
             if not public_key:
                 raise ValueError("A public archive key is required")
@@ -67,7 +69,23 @@ def build_package(source, destination, public_key=None, version=None, payload=No
             write(stage / "DEBIAN/conffiles", "/etc/apt/sources.list.d/amogos.sources\n")
         else:
             raise ValueError("Unknown maintained package: " + name)
+        resources=source/"rootfs"
+        if resources.is_dir():
+            shutil.copytree(resources,stage,dirs_exist_ok=True)
+            for path in stage.rglob("*"):
+                if path.relative_to(stage).parts[0] != "DEBIAN":
+                    if path.is_dir():
+                        path.chmod(0o755)
+                    elif (resources/path.relative_to(stage)).is_file():
+                        path.chmod(0o644)
+            executable=(stage/"usr/libexec/amogos-installed-cleanup")
+            if executable.exists():
+                executable.chmod(0o755)
+            configuration=["/"+str(path.relative_to(stage)).replace(os.sep,"/") for path in (stage/"etc").rglob("*") if path.is_file()] if (stage/"etc").exists() else []
+            if configuration:
+                write(stage/"DEBIAN/conffiles","\n".join(sorted(configuration))+"\n")
         payload_paths = [p for p in stage.rglob("*") if p.relative_to(stage).parts[0] != "DEBIAN"]
+        stage.chmod(0o755)
         size = sum(4 if p.is_dir() else (p.stat().st_size + 1023) // 1024 for p in payload_paths)
         write(stage / "DEBIAN/control", control.rstrip() + "\nInstalled-Size: " + str(size) + "\n")
         environment = dict(os.environ, SOURCE_DATE_EPOCH=os.environ.get("SOURCE_DATE_EPOCH", "1793491200"))

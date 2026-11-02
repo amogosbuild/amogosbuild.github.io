@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only the installed fixed-action helper receives installer authorization. -->
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>AmogOS</vendor>
+  <action id="org.amogos.installer.manage">
+    <description>Install AmogOS 2 Pro</description>
+    <message>Authentication is required to inspect storage or install AmogOS 2 Pro.</message>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/amogos-installer-helper</annotate>
+  </action>
+</policyconfig>

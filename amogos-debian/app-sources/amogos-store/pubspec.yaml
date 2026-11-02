@@ -1,0 +1,23 @@
+# AmogOS App Store uses the shared Flutter SDK and supplied shopper artwork.
+name: amogos_store
+description: AmogOS 2 Pro applications and system updates.
+publish_to: none
+version: 0.1.4+5
+environment:
+  sdk: '>=3.13.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/characters/
+    - assets/catalog/
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope.ttf

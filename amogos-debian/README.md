@@ -1,7 +1,7 @@
 # AmogOS Debian package archive
 
 A signed APT repository for **AmogOS 2 Pro / Debian 13 amd64**.
-The archive contains all four AmogOS applications, amogos-update, and
+The archive contains all four AmogOS applications, amogos-system, amogos-update, and
 amogos-archive-keyring. See [PACKAGES.md](PACKAGES.md) for exact versions
 and direct downloads.
 
@@ -50,13 +50,15 @@ never add it, private exports or revocation certificates to this repository.
 
 To update an application, copy its newly built DEB into
 pool/main/a/PACKAGE-NAME/. Keep existing versioned filenames intact.
-The migration and keyring package sources live in packages/.
+The migration, persistent system defaults and keyring sources live in packages/.
+Application sources are included in app-sources/.
 
     python3 scripts/build-repository.py \
       --gnupg-home /srv/chocolatier/repository-keys/amogos-archive \
       --signing-key AD0DEB95462DBF4C6C4F3A5571447013FAF2C774
     python3 scripts/validate-repository.py
     sudo python3 tests/test-updater.py
+    python3 tests/test-migration.py
     python3 tests/test-apt.py
 
 Run these commands from amogos-debian/. The builder packages maintained

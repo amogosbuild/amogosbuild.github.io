@@ -1,0 +1,10 @@
+Package: amogos-installer
+Version: 0.1.5
+Section: admin
+Priority: optional
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core, amogos-system (>= 2.1.0-1)
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.

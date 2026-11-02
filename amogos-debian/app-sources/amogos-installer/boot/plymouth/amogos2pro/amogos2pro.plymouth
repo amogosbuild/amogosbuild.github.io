@@ -1,0 +1,9 @@
+# Animated AmogOS 2 Pro startup theme.
+[Plymouth Theme]
+Name=AmogOS 2 Pro
+Description=Amogus above shimmering text and a sliding startup light.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/amogos2pro
+ScriptFile=/usr/share/plymouth/themes/amogos2pro/amogos2pro.script

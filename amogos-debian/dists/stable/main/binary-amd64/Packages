@@ -79,6 +79,22 @@ Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
  Guided storage setup, dual-boot detection, manual partition assignment,
  bundled mini-games, and optional YouTube Music playback.
 
+Package: amogos-installer
+Version: 0.1.5
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core, amogos-system (>= 2.1.0-1)
+Filename: pool/main/a/amogos-installer/amogos-installer_0.1.5_amd64.deb
+Size: 7964060
+MD5sum: 9cada9c88a6f929572da5d187959a318
+SHA1: b378fc3d6c48a9a3e2b45e73cea718394b53ccf8
+SHA256: c9eb9e3f67946e697884c2d904201db079d71b35cc777b3222ade324d5953161
+Section: admin
+Priority: optional
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.
+
 Package: amogos-music
 Version: 1.0.20~alpha2022
 Architecture: amd64
@@ -131,6 +147,41 @@ Description: AmogOS App Store and system updates
  Software discovery and installation from APT, Flathub, and AppImageHub,
  with available-source selection and a shared installation queue.
 
+Package: amogos-store
+Version: 0.1.4
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, ca-certificates, libfuse2t64, pkexec, polkitd, xdg-utils, zenity, libgtk-3-0t64, libgl1, libegl1, libstdc++6, qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Recommends: flatpak, xdg-desktop-portal
+Filename: pool/main/a/amogos-store/amogos-store_0.1.4_amd64.deb
+Size: 8384652
+MD5sum: 6f6db8c471f7824364c5e0fa7a6119c7
+SHA1: f38c1cdc8fe47a77cca995853fb8b9234e851f9e
+SHA256: 523773c5f4acf8a4cbde1a611c08e32aaac5d0ce689e00fcb9d0499403d1856c
+Section: admin
+Priority: optional
+Description: AmogOS App Store and system updates
+ Software discovery and installation from APT, Flathub, and AppImageHub,
+ with available-source selection and a shared installation queue.
+
+Package: amogos-system
+Version: 2.1.0-1
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 114
+Depends: plymouth, initramfs-tools, python3, fonts-dejavu-core
+Replaces: amogos-installer (<< 0.1.5)
+Filename: pool/main/a/amogos-system/amogos-system_2.1.0-1_all.deb
+Size: 32438
+MD5sum: 0fcd9e150553db128e7e2dd02195d54b
+SHA1: 31b4280805b42af53193dfb1dbf8f48c70b8db88
+SHA256: 343a70af6678076e48c18b165414d02e7ba1d7662d7fd6a284fbfc5a1c018f1a
+Section: admin
+Priority: optional
+Description: Persistent AmogOS boot theme and system defaults
+ Retains the boot animation and low-memory system configuration after the
+ live-session installation tools have been removed.
+
 Package: amogos-update
 Version: 2.0.0-1
 Architecture: all
@@ -147,4 +198,22 @@ Priority: optional
 Description: Versioned AmogOS system update migrations
  Runs the packaged AmogOS migration script when a newer package version
  is configured by APT or dpkg. The initial migration is a no-op.
+
+Package: amogos-update
+Version: 2.1.0-1
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 36
+Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-1), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Filename: pool/main/a/amogos-update/amogos-update_2.1.0-1_all.deb
+Size: 7422
+MD5sum: fa624e52db52994fd9840ec415d06b27
+SHA1: fc49ef98330eb573522236b1f51bbe1e28088c1c
+SHA256: 91a98252d5cccbd96f93876c9e52dc3e7e7982b81738d1c08378a9767175b44a
+Section: admin
+Priority: optional
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. Release 2.1 repairs desktop application
+ compatibility, repository defaults and installed-system identity.
 

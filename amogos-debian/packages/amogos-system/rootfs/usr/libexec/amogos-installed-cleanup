@@ -1,0 +1,33 @@
+#!/usr/bin/python3
+import os
+import pathlib
+import pwd
+import subprocess
+import sys
+
+root=pathlib.Path('/')
+identity=(root/'etc/os-release').read_text()
+if os.geteuid()!=0 or '\nID=amogos\n' not in '\n'+identity+'\n':
+    raise SystemExit('This cleanup applies only to AmogOS.')
+if 'boot=live' in (root/'proc/cmdline').read_text().split() or (root/'run/amogos-install-target').exists():
+    raise SystemExit(0)
+names=('amogos-installer','calamares','calamares-settings-debian')
+installed=[]
+for name in names:
+    result=subprocess.run(['dpkg-query','-W','-f=${db:Status-Status}',name],text=True,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
+    if result.returncode==0 and result.stdout.strip() in ('installed','config-files'):
+        installed.append(name)
+if installed:
+    command=['apt-get','-y','--no-auto-remove','-o','DPkg::Lock::Timeout=600','purge',*installed]
+    plan=subprocess.run([*command[:1],'--simulate',*command[1:]],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,check=True)
+    removed={line.split()[1] for line in plan.stdout.splitlines() if line.startswith(('Remv ','Purg '))}
+    if removed-set(names):
+        raise SystemExit('Installer cleanup would remove other applications; refusing.')
+    subprocess.run(command,env=dict(os.environ,DEBIAN_FRONTEND='noninteractive'),check=True)
+folders=[root/'etc/skel/Desktop']+[pathlib.Path(account.pw_dir)/'Desktop' for account in pwd.getpwall() if 1000<=account.pw_uid<65534 and account.pw_dir.startswith('/home/')]
+for folder in folders:
+    for name in ('amogos.installer.desktop','amogos-calamares-fallback.desktop','calamares.desktop','install-debian.desktop'):
+        (folder/name).unlink(missing_ok=True)
+for name in ('usr/share/applications/amogos-calamares-fallback.desktop','usr/local/bin/amogos-calamares-fallback','usr/local/libexec/amogos-live-shortcuts'):
+    (root/name).unlink(missing_ok=True)
+print('Live installation tools removed; the AmogOS boot theme and applications are retained.')

@@ -45,7 +45,7 @@ class UpdaterLifecycle(unittest.TestCase):
                 copy_binary(shutil.which(binary), "/usr/bin/" + binary)
             (root / "var/lib/dpkg").mkdir(parents=True)
             (root / "var/log").mkdir(parents=True)
-            status = "".join("Package: " + name + "\nStatus: install ok installed\nArchitecture: all\nVersion: 9999\nMaintainer: Test\nDescription: Disposable test fixture\n\n" for name in ("dash", "coreutils", "dpkg"))
+            status = "".join("Package: " + name + "\nStatus: install ok installed\nArchitecture: all\nVersion: 9999\nMaintainer: Test\nDescription: Disposable test fixture\n\n" for name in ("dash", "coreutils", "dpkg", "python3", "python3-apt", "amogos-system", "amogos-store", "qtwayland5", "qt6-wayland", "xwayland", "xauth", "libxcb-cursor0"))
             (root / "var/lib/dpkg/status").write_text(status)
             def dpkg(*arguments, success=True):
                 result = subprocess.run(["dpkg", "--root=" + str(root), *map(str, arguments)], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -55,7 +55,7 @@ class UpdaterLifecycle(unittest.TestCase):
                 return build_package(ROOT / "packages/amogos-update", packages, version=version, payload=payload)
             stamp = root / "var/lib/amogos-update/applied-version"
             counter = root / "var/lib/amogos-update/test-applied"
-            initial = package("2.0.0-1")
+            initial = package("2.0.0-1", "#!/bin/sh\nexit 0\n")
             dpkg("--install", initial)
             self.assertEqual(stamp.read_text(), "2.0.0-1\n")
             result = subprocess.run(["chroot", str(root), "/usr/bin/amogos-update"], text=True, capture_output=True, check=True)

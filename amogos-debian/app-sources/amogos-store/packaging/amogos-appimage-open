@@ -1,0 +1,19 @@
+#!/usr/bin/python3 -I
+import shutil
+import subprocess
+import sys
+
+sys.path.insert(0,"/usr/lib/amogos-store/backend")
+from amogos_store import appimages
+
+try:
+    if len(sys.argv)!=2:
+        raise ValueError("Choose one installed AppImage.")
+    appimages.launch(sys.argv[1])
+except Exception as error:
+    message=str(error)
+    if zenity:=shutil.which("zenity"):
+        subprocess.run([zenity,"--error","--no-markup","--title=AmogOS App Store","--text="+message],check=False)
+    else:
+        print(message,file=sys.stderr)
+    raise SystemExit(1)

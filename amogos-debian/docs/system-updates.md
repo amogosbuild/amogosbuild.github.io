@@ -1,64 +1,42 @@
-# Versioned AmogOS system changes
+# AmogOS 2.1 system update
 
-Amogos-update is an architecture-independent Debian package. The initial
-/usr/bin/amogos-update exits successfully and makes no system changes.
-Its current package version is 2.0.0-1.
+The signed `amogos-update` 2.1.0-1 package upgrades AmogOS 2.0 through normal APT updates. It depends on App Store 0.1.4 and the persistent `amogos-system` package. No ISO reinstall is required.
 
-## What happens during an OS update
+    sudo apt update
+    sudo apt full-upgrade
+    sudo reboot
 
-1. APT refreshes the signed AmogOS index and finds a higher package version.
-2. The user installs the available updates through the App Store or APT.
-3. Dpkg replaces /usr/bin/amogos-update with the new packaged script.
-4. The package's postinst configure invokes it as root.
-5. Only after success is the version written atomically to
-   /var/lib/amogos-update/applied-version.
+The App Store's system updates use the same signed package versions. Online AmogOS Installer installations also perform the full upgrade and verify that no updates or package configuration remain pending.
 
-This uses the same upgrade path as other OS packages. There is no background
-watcher, raw GitHub script polling, remote shell execution, or boot-time rerun.
-The initial package records its successful no-op version.
+## Changes
 
-## Publish a future change
+- Sets `OS_VERSION` and `VERSION_ID` to 2.1, updates the other AmogOS identity files, and removes the old identity comment. The local dpkg diversion retains AmogOS identity across Debian base-files upgrades; the vendor backup is preserved.
+- Restores normal APT recommendations and provides Qt 5/Qt 6 Wayland plugins, XWayland and X11 support for current and future desktop packages. It does not force a global Qt platform override. VLC 3 and Krita use XWayland in a Wayland session; reboot after the update to refresh the desktop display environment.
+- Repairs missing standard Debian main repository entries while retaining custom repositories.
+- Reduces App Store catalog and image memory, bounds result pages and logs, and fixes repository-specific dependency planning and package progress descriptors.
+- Removes Calamares and AmogOS Installer only on installed systems. Live sessions retain both installation tools. No autoremove is used.
 
-Edit packages/amogos-update/amogos-update, then increase Version: in its
-control file, for example from 2.0.0-1 to 2.0.1-1. Rebuild and sign the
-archive with scripts/build-repository.py, validate it, and commit the new
-DEB, indexes, signatures and source together.
+`amogos-system` owns the Plymouth animation and persistent low-memory configuration. Desktop themes, wallpaper and Plasma settings are retained. The cleanup service runs before the display manager on an installed boot; it also runs after an online system migration when systemd is available. It waits for the package manager's lock before removing live tools. Installer 0.1.5 removes the tools from its target after bootloader setup, and bundles the persistent system package for offline installations.
 
-**A Git commit or a changed file hash alone is not an APT upgrade.**
-The package version must increase. The builder rejects changes to a maintained
-source package that reuse an existing version.
+## Repeating the update
 
-During automatic execution, the migration receives:
+On 2.1 or any newer OS version, `sudo amogos-update` prints exactly:
 
-| Environment variable | Meaning |
-| --- | --- |
-| AMOGOS_UPDATE_FROM | Last successfully applied package version, or empty on first install |
-| AMOGOS_UPDATE_TO | New version being configured |
+    You are already on the latest AmogOS version
 
-Use these values if a release needs to migrate older states. Users can skip
-several releases, so the latest script must account for all supported earlier
-states or include the required earlier steps.
+It makes no identity or repository changes. Reconfiguring a successfully applied package also prints that message. Package downgrades cannot reset migration history.
 
-## Failure and repetition
+The package's postinst records its version atomically in `/var/lib/amogos-update/applied-version` only after success. Failures leave the previous stamp intact and dpkg reports unfinished configuration. After repairing the underlying issue, `sudo dpkg --configure -a` retries it.
 
-Migrations must be idempotent and noninteractive. They may be retried after an
-interruption and must preserve user data and intentional local settings.
-Use a nonzero exit code on failure. A failure leaves the old success stamp
-intact and dpkg reports the package as needing configuration; it does not
-silently report the system as updated.
+## Future releases
 
-After resolving the underlying problem, sudo dpkg --configure -a retries
-configuration. Reinstalling an already successful version does not rerun it.
-A package downgrade does not roll back migration history or rerun an older
-script. Purging the package removes its version stamp and packaged command;
-other migration data is retained if its state directory is nonempty.
+Change the migration and bump its package version, target OS version and dependencies together. Account for users skipping releases. Rebuild the DEB and signed archive, validate, then commit sources, immutable package files and indexes together. A changed script or Git commit alone does not constitute an APT update. Existing package versions cannot be replaced with different contents.
 
-Do not call APT or dpkg from the migration script: the package manager already
-holds its locks. Express package dependencies in control. Put dependency
-or hardware-specific application work in its own package where appropriate.
+Do not invoke APT or dpkg installation from a migration while its postinst holds the package-manager lock. Declare package dependencies in control files and defer removal to a separate service.
 
-Normally, let the package manager run migrations. The current terminal command
-is harmless, but future migration code should not depend on being called
-manually. Test changes with sudo python3 tests/test-updater.py and add
-meaningful migration-specific tests before publishing them.
+    python3 scripts/validate-repository.py
+    sudo python3 tests/test-updater.py
+    python3 tests/test-migration.py
+    python3 tests/test-apt.py
 
+The lifecycle test uses real dpkg in a disposable minimal chroot; migration tests check 2.0 upgrades and unchanged files on 2.1, 2.1.1, 2.2 and 3.0. Full desktop and installer-target integration results are retained with the release verification artifacts.

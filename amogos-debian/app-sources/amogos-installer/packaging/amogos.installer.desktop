@@ -1,0 +1,9 @@
+# Guided live installation for AmogOS 2 Pro.
+[Desktop Entry]
+Type=Application
+Name=Install AmogOS 2 Pro
+Exec=/usr/bin/amogos-installer
+Icon=/usr/share/pixmaps/amogos-installer.png
+Terminal=false
+Categories=System;
+StartupWMClass=amogos.installer

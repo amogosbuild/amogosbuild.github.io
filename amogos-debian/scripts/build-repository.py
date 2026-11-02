@@ -31,10 +31,10 @@ write(ROOT / "keyrings/amogos-archive-keyring.asc", run([*gpg, "--armor", "--exp
 write(ROOT / "keyrings/fingerprint.txt", fingerprint + "\n")
 with tempfile.TemporaryDirectory(prefix=".repository-build-", dir=ROOT) as temporary:
     temporary = pathlib.Path(temporary)
-    for name in ("amogos-update", "amogos-archive-keyring"):
+    for name in ("amogos-system", "amogos-update", "amogos-archive-keyring"):
         place_package(build_package(ROOT / "packages" / name, temporary, public_key=public))
     packages = sorted((ROOT / "pool").rglob("*.deb"))
-    expected = {"amogos-installer", "amogos-store", "amogos-music", "amogos-notes", "amogos-update", "amogos-archive-keyring"}
+    expected = {"amogos-installer", "amogos-store", "amogos-music", "amogos-notes", "amogos-system", "amogos-update", "amogos-archive-keyring"}
     actual = {package_info(path)["Package"] for path in packages}
     if not expected.issubset(actual):
         raise SystemExit("Missing AmogOS packages: " + ", ".join(sorted(expected - actual)))
@@ -50,7 +50,7 @@ with tempfile.TemporaryDirectory(prefix=".repository-build-", dir=ROOT) as tempo
         "Label: AmogOS 2 Pro",
         "Suite: stable",
         "Codename: chocolatier",
-        "Version: 2.0",
+        "Version: 2.1",
         "Date: " + now.strftime("%a, %d %b %Y %H:%M:%S +0000"),
         "Architectures: amd64",
         "Components: main",

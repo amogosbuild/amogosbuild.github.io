@@ -1,0 +1,113 @@
+# The supplied character is cropped above a responsive shimmering title and sliding startup light.
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+Plymouth.SetRefreshRate(30);
+
+layout.scale = Window.GetHeight() / 800;
+if (Window.GetWidth() / 1280 < layout.scale) layout.scale = Window.GetWidth() / 1280;
+if (layout.scale < 0.6) layout.scale = 0.6;
+if (layout.scale > 1.5) layout.scale = 1.5;
+character.image = Image("amogus-source.png").Crop(237, 631, 468, 621);
+character.height = Math.Int(220 * layout.scale);
+character.image = character.image.Scale(Math.Int(468 * character.height / 621), character.height);
+character.sprite = Sprite(character.image);
+title.image = Image.Text("AmogOS 2 Pro", 0.34, 0.34, 0.39, 1, "Sans Bold 42");
+title.light = Image.Text("AmogOS 2 Pro", 1, 0.98, 1, 1, "Sans Bold 42");
+title.image = title.image.Scale(Math.Int(title.image.GetWidth() * layout.scale), Math.Int(title.image.GetHeight() * layout.scale));
+title.light = title.light.Scale(title.image.GetWidth(), title.image.GetHeight());
+title.sprite = Sprite(title.image);
+title.x = Window.GetX() + (Window.GetWidth() - title.image.GetWidth()) / 2;
+for (i = 0; i < 24; i++)
+{
+    shine[i].sprite = Sprite();
+    shine[i].sprite.SetZ(11);
+}
+
+rail.image = Image("rail.png");
+rail.image = rail.image.Scale(Math.Int(rail.image.GetWidth() * layout.scale), Math.Int(rail.image.GetHeight() * layout.scale));
+rail.sprite = Sprite(rail.image);
+layout.height = character.image.GetHeight() + 24 * layout.scale + title.image.GetHeight() + 32 * layout.scale + rail.image.GetHeight();
+layout.top = Window.GetY() + (Window.GetHeight() - layout.height) / 2;
+character.sprite.SetPosition(Window.GetX() + (Window.GetWidth() - character.image.GetWidth()) / 2, layout.top, 10);
+title.y = layout.top + character.image.GetHeight() + 24 * layout.scale;
+title.sprite.SetPosition(title.x, title.y, 10);
+rail.x = Window.GetX() + (Window.GetWidth() - rail.image.GetWidth()) / 2;
+rail.y = title.y + title.image.GetHeight() + 32 * layout.scale;
+rail.sprite.SetPosition(rail.x, rail.y, 10);
+slider.image = Image("slider.png");
+slider.image = slider.image.Scale(Math.Int(slider.image.GetWidth() * layout.scale), Math.Int(slider.image.GetHeight() * layout.scale));
+slider.sprite = Sprite(slider.image);
+slider.sprite.SetPosition(rail.x, rail.y, 11);
+prompt.sprite = Sprite();
+prompt.sprite.SetZ(100);
+tick = 0;
+normal = 1;
+
+fun refresh()
+{
+    global.tick += 1;
+    phase = (tick % 96) / 96;
+    sweep = phase * (title.image.GetWidth() + 168 * layout.scale) - 168 * layout.scale;
+    for (i = 0; i < 24; i++)
+    {
+        left = Math.Int(sweep + i * 7 * layout.scale);
+        right = Math.Int(sweep + (i + 1) * 7 * layout.scale);
+        if (left < 0) left = 0;
+        if (right > title.image.GetWidth()) right = title.image.GetWidth();
+        if (right > left && left < title.image.GetWidth())
+        {
+            shine[i].sprite.SetImage(title.light.Crop(left, 0, right - left, title.light.GetHeight()));
+            shine[i].sprite.SetPosition(title.x + left, title.y, 11);
+            shine[i].sprite.SetOpacity((Math.Sin((i / 23) * 3.14159)) * normal);
+        }
+        else shine[i].sprite.SetOpacity(0);
+    }
+    ease = (1 - Math.Cos(phase * 3.14159)) / 2;
+    slider.sprite.SetX(rail.x + ease * (rail.image.GetWidth() - slider.image.GetWidth()));
+    slider.sprite.SetOpacity(Math.Sin(phase * 3.14159) * 0.8 + 0.2);
+}
+
+fun display_normal()
+{
+    global.normal = 1;
+    prompt.sprite.SetOpacity(0);
+}
+
+fun show_prompt(text)
+{
+    image = Image.Text(text, 0.91, 0.88, 0.95, 1, "Sans 16");
+    prompt.sprite.SetImage(image);
+    prompt.sprite.SetPosition(Window.GetX() + (Window.GetWidth() - image.GetWidth()) / 2, rail.y + rail.image.GetHeight() + 36 * layout.scale, 100);
+    prompt.sprite.SetOpacity(1);
+}
+
+fun display_password(text, count)
+{
+    global.normal = 0;
+    bullets = "";
+    for (i = 0; i < count; i++) bullets += "*";
+    show_prompt(text + "  " + bullets);
+}
+
+fun display_question(text, answer)
+{
+    global.normal = 0;
+    show_prompt(text + "  " + answer);
+}
+
+fun display_message(text)
+{
+    show_prompt(text);
+}
+
+fun hide_message(text)
+{
+    if (normal) prompt.sprite.SetOpacity(0);
+}
+
+Plymouth.SetRefreshFunction(refresh);
+Plymouth.SetDisplayNormalFunction(display_normal);
+Plymouth.SetDisplayPasswordFunction(display_password);
+Plymouth.SetDisplayQuestionFunction(display_question);
+Plymouth.SetDisplayMessageFunction(display_message);
+Plymouth.SetHideMessageFunction(hide_message);

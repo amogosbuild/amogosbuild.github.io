@@ -1,0 +1,3 @@
+# Fast compression keeps boot image generation small in memory during installation and future updates.
+COMPRESS=gzip
+COMPRESSLEVEL=1

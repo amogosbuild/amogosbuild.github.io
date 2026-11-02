@@ -1,0 +1,3 @@
+// Use Debian's normal recommended dependencies for complete desktop applications.
+APT::Install-Recommends "true";
+APT::Install-Suggests "false";

@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+project="$(cd "$(dirname "$0")/.." && pwd)"
+bundle="$project/build/linux/x64/release/bundle"
+test -x "$bundle/amogos_store"
+stage="$(mktemp -d)"
+trap 'rm -rf -- "$stage"' EXIT
+mkdir -p "$stage/DEBIAN" "$stage/usr/lib/amogos-store/app" "$stage/usr/lib/amogos-store/backend" "$stage/usr/libexec" "$stage/usr/bin" "$stage/usr/share/applications" "$stage/usr/share/pixmaps" "$stage/usr/share/polkit-1/actions" "$stage/usr/share/doc/amogos-store"
+cp "$project/packaging/control" "$stage/DEBIAN/control"
+cp -a "$bundle/." "$stage/usr/lib/amogos-store/app/"
+cp -a "$project/backend/." "$stage/usr/lib/amogos-store/backend/"
+find "$stage" -type d -name __pycache__ -prune -exec rm -rf -- {} +
+install -m 755 "$project/packaging/amogos-store" "$stage/usr/bin/"
+install -m 755 "$project/packaging/amogos-appstore" "$stage/usr/bin/"
+install -m 755 "$project/packaging/amogos-store-helper" "$stage/usr/libexec/"
+install -m 755 "$project/packaging/amogos-appimage-open" "$stage/usr/libexec/"
+install -m 644 "$project/packaging/amogos.appstore.desktop" "$stage/usr/share/applications/"
+install -m 644 "$project/packaging/org.amogos.store.policy" "$stage/usr/share/polkit-1/actions/"
+install -m 644 "$project/assets/characters/shopper-darkmode.png" "$stage/usr/share/pixmaps/amogos-store.png"
+install -m 644 "$project/assets/characters/shopper-darkmode.png" "$stage/usr/share/pixmaps/amogos.appstore.png"
+cp "$project/third_party/"*.txt "$stage/usr/share/doc/amogos-store/"
+cp "$project/third_party/"*.md "$stage/usr/share/doc/amogos-store/"
+chmod -R go-w "$stage"
+mkdir -p "$project/dist"
+dpkg-deb --root-owner-group --build "$stage" "$project/dist/"
