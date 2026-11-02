@@ -9,10 +9,26 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "scripts"))
-from archive import ROOT, build_package, place_package
+from archive import ROOT, build_package, place_package, package_contents
 
 
 class UpdaterLifecycle(unittest.TestCase):
+    def test_generated_bytecode_is_not_packaged(self):
+        with tempfile.TemporaryDirectory(prefix='amogos-bytecode-test-') as temporary:
+            temporary=pathlib.Path(temporary)
+            source=temporary/'source'
+            shutil.copytree(ROOT/'packages/amogos-update',source)
+            resources=source/'rootfs/usr/lib/amogos-update'
+            cache=resources/'__pycache__'
+            cache.mkdir(exist_ok=True)
+            (cache/'migrate.cpython-314.pyc').write_bytes(b'generated cache')
+            (resources/'generated.pyc').write_bytes(b'generated cache')
+            (resources/'generated.pyo').write_bytes(b'generated cache')
+            package=build_package(source,temporary/'packages')
+            contents=package_contents(package)
+            self.assertTrue(any(name.endswith('/migrate.py') for _,name in contents))
+            self.assertFalse(any('__pycache__' in name or name.endswith(('.pyc','.pyo')) for _,name in contents))
+
     def test_changed_script_requires_a_version_bump(self):
         with tempfile.TemporaryDirectory(prefix="amogos-version-test-") as temporary:
             temporary = pathlib.Path(temporary)

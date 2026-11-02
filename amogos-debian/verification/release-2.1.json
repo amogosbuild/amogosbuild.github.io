@@ -2,7 +2,7 @@
   "release": "2.1",
   "verifiedUtc": "2026-11-02T00:03:41.339054+00:00",
   "packages": {
-    "updater": "2.1.0-1",
+    "updater": "2.1.0-2",
     "system": "2.1.0-1",
     "store": "0.1.4",
     "installer": "0.1.5"
@@ -22,7 +22,8 @@
       "2.1.1",
       "2.2",
       "3.0"
-    ]
+    ],
+    "generatedPythonBytecodeExcluded": true
   },
   "catalogPackages": 103629,
   "memory": {

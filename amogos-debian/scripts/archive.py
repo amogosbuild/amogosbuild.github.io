@@ -71,7 +71,7 @@ def build_package(source, destination, public_key=None, version=None, payload=No
             raise ValueError("Unknown maintained package: " + name)
         resources=source/"rootfs"
         if resources.is_dir():
-            shutil.copytree(resources,stage,dirs_exist_ok=True)
+            shutil.copytree(resources,stage,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc','*.pyo'))
             for path in stage.rglob("*"):
                 if path.relative_to(stage).parts[0] != "DEBIAN":
                     if path.is_dir():

@@ -17,3 +17,4 @@ Generated from the archive metadata. All application DEBs target Debian 13 amd64
 | amogos-system | 2.1.0-1 | all | Persistent boot theme and system policy | [DEB](pool/main/a/amogos-system/amogos-system_2.1.0-1_all.deb) |
 | amogos-update | 2.0.0-1 | all | amogos-update | [DEB](pool/main/a/amogos-update/amogos-update_2.0.0-1_all.deb) |
 | amogos-update | 2.1.0-1 | all | amogos-update | [DEB](pool/main/a/amogos-update/amogos-update_2.1.0-1_all.deb) |
+| amogos-update | 2.1.0-2 | all | amogos-update | [DEB](pool/main/a/amogos-update/amogos-update_2.1.0-2_all.deb) |

@@ -217,3 +217,21 @@ Description: Versioned AmogOS system update migrations
  is configured by APT or dpkg. Release 2.1 repairs desktop application
  compatibility, repository defaults and installed-system identity.
 
+Package: amogos-update
+Version: 2.1.0-2
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 22
+Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-1), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Filename: pool/main/a/amogos-update/amogos-update_2.1.0-2_all.deb
+Size: 3112
+MD5sum: 901a62e3158387e2346b28d3c599790a
+SHA1: cb34dd90e4dad6ab35b18f5120d193fdf309ed2f
+SHA256: c0a898c45863ad51701c0f733f8255bbc37f0ff4104142ea8b3b7504cf041976
+Section: admin
+Priority: optional
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. Release 2.1 repairs desktop application
+ compatibility, repository defaults and installed-system identity.
+

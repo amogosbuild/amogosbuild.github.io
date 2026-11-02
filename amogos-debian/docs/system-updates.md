@@ -1,6 +1,6 @@
 # AmogOS 2.1 system update
 
-The signed `amogos-update` 2.1.0-1 package upgrades AmogOS 2.0 through normal APT updates. It depends on App Store 0.1.4 and the persistent `amogos-system` package. No ISO reinstall is required.
+The signed `amogos-update` 2.1.0-2 package upgrades AmogOS 2.0 through normal APT updates. It depends on App Store 0.1.4 and the persistent `amogos-system` package. No ISO reinstall is required.
 
     sudo apt update
     sudo apt full-upgrade

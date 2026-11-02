@@ -9,10 +9,11 @@ import tempfile
 import threading
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "scripts"))
-from archive import ROOT, sha256
+from archive import ROOT, sha256, fields
 
 manifest = json.loads((ROOT / "repository.json").read_text())
-updater = next(item for item in manifest["packages"] if item["package"] == "amogos-update" and item["version"] == "2.1.0-1")
+current_version=fields((ROOT/'packages/amogos-update/control').read_text())['Version']
+updater = next(item for item in manifest["packages"] if item["package"] == "amogos-update" and item["version"] == current_version)
 requests = []
 tamper = False
 previous_release = True
@@ -51,7 +52,10 @@ try:
         for folder in ("etc/parts", "etc/sources.list.d", "etc/preferences.d", "state/lists/partial", "cache/archives/partial", "log", "downloads"):
             (temporary / folder).mkdir(parents=True, exist_ok=True)
         (temporary / "downloads").chmod(0o777)
-        source = "deb [arch=amd64 signed-by=" + str(ROOT / "keyrings/amogos-archive-keyring.gpg") + "] http://127.0.0.1:" + str(server.server_port) + " stable main\n"
+        keyring=temporary/'archive-keyring.gpg'
+        keyring.write_bytes((ROOT/'keyrings/amogos-archive-keyring.gpg').read_bytes())
+        keyring.chmod(0o644)
+        source = "deb [arch=amd64 signed-by=" + str(keyring) + "] http://127.0.0.1:" + str(server.server_port) + " stable main\n"
         (temporary / "etc/sources.list").write_text(source)
         status = pathlib.Path("/var/lib/dpkg/status").read_text()
         status = "\n\n".join(p for p in status.split("\n\n") if not p.startswith("Package: amogos-update\n"))
