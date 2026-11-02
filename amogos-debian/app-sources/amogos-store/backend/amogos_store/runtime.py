@@ -18,6 +18,7 @@ class StoreError(Exception):
 
 
 PLAN_DIRECTORY = pathlib.Path("/var/lib/amogos-store/plans")
+EVENT_SINK = None
 
 
 def run(args, timeout=90, check=True):
@@ -29,8 +30,12 @@ def run(args, timeout=90, check=True):
 
 
 def emit(message, progress=None, **extra):
+    event=dict(message=message,progress=progress,**extra)
+    if EVENT_SINK is not None:
+        EVENT_SINK(event)
+        return
     try:
-        print(json.dumps(dict(message=message, progress=progress, **extra)), flush=True)
+        print(json.dumps(event), flush=True)
     except BrokenPipeError:
         pass
 
@@ -153,7 +158,7 @@ def save_plan(plan):
     return dict(plan, token=token)
 
 
-def consume_plan(token, source):
+def read_plan(token, source):
     require_root()
     if not isinstance(token, str) or not re.fullmatch(r"[a-f0-9]{48}", token):
         raise StoreError("Review a new package transaction.")
@@ -164,5 +169,10 @@ def consume_plan(token, source):
         raise StoreError("This transaction is no longer available. Review it again.")
     if data["owner"] != owner() or data["expires"] < time.time() or data["source"] != source:
         raise StoreError("This review expired or belongs to another user.")
-    path.unlink()
+    return data
+
+
+def consume_plan(token, source):
+    data=read_plan(token,source)
+    (PLAN_DIRECTORY/(token+".json")).unlink()
     return data

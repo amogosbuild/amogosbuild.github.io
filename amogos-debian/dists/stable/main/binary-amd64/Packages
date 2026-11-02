@@ -181,6 +181,23 @@ Description: AmogOS App Store and system updates
  Software discovery and installation from APT, Flathub, and AppImageHub,
  with available-source selection and a shared installation queue.
 
+Package: amogos-store
+Version: 0.1.6
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, python3-gi, gir1.2-glib-2.0, acl, systemd, ca-certificates, libfuse2t64, pkexec, polkitd, xdg-utils, zenity, libgtk-3-0t64, libgl1, libegl1, libstdc++6, qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Recommends: flatpak, xdg-desktop-portal
+Filename: pool/main/a/amogos-store/amogos-store_0.1.6_amd64.deb
+Size: 8395512
+MD5sum: 1ef6fabe1bfab1c3f563faa7c16772d8
+SHA1: 7e021e4b08a67f4fa35baa734aff4093ec8786af
+SHA256: 09b78fc651be248a56fda91de16d33720ef318839ca848640e4b27f5aed4270f
+Section: admin
+Priority: optional
+Description: AmogOS App Store and system updates
+ Software discovery and installation from APT, Flathub, and AppImageHub,
+ with available-source selection and a shared installation queue.
+
 Package: amogos-system
 Version: 2.1.0-1
 Architecture: all

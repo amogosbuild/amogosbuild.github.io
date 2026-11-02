@@ -5,11 +5,28 @@ from .runtime import StoreError, consume_plan, digest, emit, package_name, save_
 
 def resolve(request):
     c=apt_catalog.cache()
+    try:
+        return resolve_cache(c,request)
+    finally:
+        if hasattr(c,"close"):
+            c.close()
+        import gc
+        gc.collect()
+
+
+def resolve_cache(c,request):
     action=request.get("operation","install")
-    if action not in ("install","repair","remove","update","update-selected","upgrade-system"):
+    if action not in ("install","repair","repair-system","remove","update","update-selected","upgrade-system"):
         raise StoreError("Unsupported Debian package operation.")
+    from . import apt_state
+    unfinished=apt_state.pending()
+    if unfinished and action not in ("repair","repair-system"):
+        raise StoreError("Package configuration was interrupted. Open Updates and choose Repair interrupted installation before continuing.")
     package=request.get("id","")
-    if action=="upgrade-system":
+    if action=="repair-system":
+        if c.broken_count and not c._depcache.fix_broken():
+            raise StoreError("APT could not resolve the broken dependencies. Review the package log before continuing.")
+    elif action=="upgrade-system":
         c.upgrade(dist_upgrade=True)
     elif action=="update-selected":
         selected=request.get("packages")
@@ -65,11 +82,14 @@ def resolve(request):
             if apt_pkg.version_compare(candidate.version,p.installed.version)<0:
                 raise StoreError("This repository would downgrade an installed package. Choose a newer version or repository.")
         changes.append(dict(id=p.name, action="remove" if remove else "install" if not p.installed else "reinstall" if action=="repair" and p.name==package else "update", fromVersion=p.installed.version if p.installed else "", version="" if remove else candidate.version, size=0 if remove else candidate.size, automatic=bool(p.is_auto_installed)))
+    for item in unfinished:
+        if not any(v["id"]==item["id"] for v in changes):
+            changes.append(dict(id=item["id"],action="configure",fromVersion=item["version"],version=item["version"],size=0,automatic=True))
     changes.sort(key=lambda x:x["id"])
     installed=[(p.name,p.installed.version) for p in c if p.installed]
-    signature=digest(dict(changes=changes,installed=sorted(installed)))
+    signature=digest(dict(changes=changes,installed=sorted(installed),pending=unfinished))
     download=max(c.required_download,sum(v["size"] for v in changes if v["action"]=="reinstall"))
-    return dict(source="deb",operation=action,id=package,packages=selected if action=="update-selected" else [],repo=request.get("repo",""),changes=changes,downloadBytes=download,spaceBytes=c.required_space,fingerprint=signature,summary="Update AmogOS 2 Pro" if action=="upgrade-system" else "Update selected APT packages" if action=="update-selected" else action.capitalize()+" "+package,note="The review includes dependencies required by your selected packages." if action=="update-selected" else "")
+    return dict(source="deb",operation=action,id=package,packages=selected if action=="update-selected" else [],repo=request.get("repo",""),changes=changes,pendingConfiguration=unfinished,downloadBytes=download,spaceBytes=c.required_space,fingerprint=signature,summary="Repair unfinished package installation" if action=="repair-system" else "Update AmogOS 2 Pro" if action=="upgrade-system" else "Update selected APT packages" if action=="update-selected" else action.capitalize()+" "+package,note="Resume the listed packages' interrupted configuration before applying any other reviewed changes." if unfinished else "The review includes dependencies required by your selected packages." if action=="update-selected" else "")
 
 
 PROTECTED={"amogos-system","amogos-update","amogos-store","amogos-installer","apt","dpkg","systemd","systemd-sysv","libc6","sudo","polkitd","pkexec","linux-image-amd64","grub-pc-bin","grub-efi-amd64-bin","grub2-common","sddm","plasma-desktop"}
@@ -106,15 +126,19 @@ def apply(request):
             emit("Everything is already up to date.",1,done=True)
             return
         emit("Applying the package changes you reviewed.",0)
-        packages=[v["id"]+"-" if v["action"]=="remove" else v["id"]+"="+v["version"] for v in current["changes"]]
+        packages=[v["id"]+"-" if v["action"]=="remove" else v["id"]+"="+v["version"] for v in current["changes"] if v["action"]!="configure"]
         if len(packages)>4000:
             raise StoreError("This upgrade is unusually large. Use a terminal package manager.")
         from .runtime import run
         flags=[] if any(v["action"]=="remove" for v in current["changes"]) else ["--no-remove"]
         if any(v["action"]=="reinstall" for v in current["changes"]):
             flags.append("--reinstall")
-        stream(["apt-get","-y",*flags,"--install-recommends","-o","Dpkg::Options::=--force-confold","-o","Dpkg::Use-Pty=0","-o","DPkg::Progress-Fancy=0","-o","APT::Status-Fd={status_fd}","install",*packages])
-        automatic=[v["id"] for v in current["changes"] if v["action"]!="remove" and v["automatic"]]
+        if current["pendingConfiguration"]:
+            emit("Completing the interrupted package configuration you reviewed.",0)
+            stream(["dpkg","--force-confold","--configure","--pending"])
+        if packages:
+            stream(["apt-get","-y",*flags,"--install-recommends","-o","Dpkg::Options::=--force-confold","-o","Dpkg::Use-Pty=0","-o","DPkg::Progress-Fancy=0","-o","APT::Status-Fd={status_fd}","install",*packages])
+        automatic=[v["id"] for v in current["changes"] if v["action"] not in ("remove","configure") and v["automatic"]]
         if automatic:
             run(["apt-mark","auto",*automatic])
         run(["apt-get","check"],timeout=180)

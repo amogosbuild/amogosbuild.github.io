@@ -51,13 +51,13 @@ Future<bool> reviewTransaction(
     for (final v in review['changes'] ?? []) Map<String, dynamic>.from(v),
   ];
   if (changes.isEmpty) {
-    const message =
-        'No package changes are needed. This version is already installed. Use Repair to reinstall an APT application.';
+    final message = operation == 'repair-system'
+        ? 'Package configuration is healthy. No repairs are needed.'
+        : 'No package changes are needed. This version is already installed. Use Repair to reinstall an APT application.';
     if (onError != null) {
       onError(message);
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text(message)));
+      c.showNotification(message);
     }
     return false;
   }
@@ -68,6 +68,8 @@ Future<bool> reviewTransaction(
       title: Text(
         operation == 'upgrade-system'
             ? 'Update AmogOS 2 Pro?'
+            : operation == 'repair-system'
+            ? 'Repair unfinished package installation?'
             : operation == 'remove'
             ? 'Remove $title?'
             : 'Add $title to the queue?',

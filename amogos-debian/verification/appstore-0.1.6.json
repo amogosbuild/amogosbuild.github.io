@@ -1,0 +1,49 @@
+{
+  "package": "amogos-store",
+  "version": "0.1.6",
+  "osVersion": "2.1",
+  "scope": "App Store only",
+  "isoRebuilt": false,
+  "generatedUtc": "2026-11-02T21:39:00.515039+00:00",
+  "sha256": "09b78fc651be248a56fda91de16d33720ef318839ca848640e4b27f5aed4270f",
+  "bytes": 8395512,
+  "backendTests": 48,
+  "flutterTests": 26,
+  "flutterAnalysis": "passed",
+  "sourceCommentAuditFiles": 103,
+  "linuxReleaseBuild": "passed",
+  "systemServiceIntegration": {
+    "passed": true,
+    "legacyPermissionsMigrated": true,
+    "clientTerminated": true,
+    "workerCompleted": true,
+    "pendingConfigurationRepaired": true,
+    "noBrokenPackages": true,
+    "ownerCanReconnect": true,
+    "otherUserCannotRead": true
+  },
+  "virtualBox": {
+    "passed": true,
+    "workerOutsideDesktopSession": true,
+    "observerTerminated": true,
+    "vlcRepairCompleted": true,
+    "desktopUserCanReconnect": true,
+    "noBrokenPackages": true,
+    "reopenedQueueShowsCompletion": true
+  },
+  "resourceControls": {
+    "aptCacheClosedBeforeExternalCommands": true,
+    "workerNice": 10,
+    "workerCpuWeight": 25,
+    "workerMemoryHighBytes": 268435456,
+    "hardMemoryLimit": false
+  },
+  "retainedFixes": [
+    "scoped APT repository preferences",
+    "native launch diagnostics and session environment",
+    "VLC AppImage replacement and FUSE fallback",
+    "bottom-centred timed notification pill",
+    "responsive layouts"
+  ],
+  "signingFingerprint": "AD0DEB95462DBF4C6C4F3A5571447013FAF2C774"
+}

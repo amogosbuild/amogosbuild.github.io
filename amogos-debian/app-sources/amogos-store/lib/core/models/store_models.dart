@@ -79,6 +79,8 @@ class StoreJob {
   });
   final String title, source, operation;
   final Map<String, dynamic> request, review;
+  String? transactionId;
+  bool recovered = false;
   JobStatus status = JobStatus.queued;
   String message = 'Waiting in the queue';
   double? progress;
@@ -88,7 +90,7 @@ class StoreJob {
       status == JobStatus.preparing || status == JobStatus.running;
   String get activity => operation == 'remove'
       ? 'Uninstalling'
-      : operation == 'repair'
+      : operation.startsWith('repair')
       ? 'Repairing'
       : source == 'refresh'
       ? 'Refreshing indexes'

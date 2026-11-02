@@ -4,7 +4,7 @@
   "codename": "chocolatier",
   "supportedSystem": "Debian 13 amd64",
   "signingFingerprint": "AD0DEB95462DBF4C6C4F3A5571447013FAF2C774",
-  "generatedUtc": "2026-11-02T20:09:51.292173+00:00",
+  "generatedUtc": "2026-11-02T21:39:17.179074+00:00",
   "packages": [
     {
       "package": "amogos-archive-keyring",
@@ -93,6 +93,14 @@
       "filename": "pool/main/a/amogos-store/amogos-store_0.1.5_amd64.deb",
       "bytes": 8389224,
       "sha256": "73b257f0a5fd50ee84b1b22d2e6dc80449a91c07488ca2ef03a1986956b21797"
+    },
+    {
+      "package": "amogos-store",
+      "version": "0.1.6",
+      "architecture": "amd64",
+      "filename": "pool/main/a/amogos-store/amogos-store_0.1.6_amd64.deb",
+      "bytes": 8395512,
+      "sha256": "09b78fc651be248a56fda91de16d33720ef318839ca848640e4b27f5aed4270f"
     },
     {
       "package": "amogos-system",

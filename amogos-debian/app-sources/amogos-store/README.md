@@ -37,7 +37,7 @@ VPS source: /srv/chocolatier/apps/app_store
 Application ID: amogos.appstore. Launch with amogos-appstore from a terminal.
 The former amogos-store command remains an alias.
 
-Linux package: dist/amogos-store_0.1.5_amd64.deb
+Linux package: dist/amogos-store_0.1.6_amd64.deb
 
 The maintained source is organized under lib/, backend/, packaging/, and scripts/.
 See docs/architecture.md for transaction behavior and docs/verification.md for

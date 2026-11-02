@@ -5,7 +5,7 @@ import pathlib
 import sys
 
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
-from amogos_store import alternatives, apt_transactions, appimages, catalog, flatpak_transactions, inventory, updates
+from amogos_store import alternatives, apt_transactions, appimages, catalog, flatpak_transactions, inventory, updates, jobs
 from amogos_store.runtime import StoreError
 
 PRIVILEGED={"apt-plan","apt-apply","refresh","flatpak-plan","flatpak-apply","flatpak-source"}
@@ -25,6 +25,9 @@ def main():
     user_flatpak=action in ("flatpak-plan","flatpak-apply") and request.get("scope")=="user"
     if action in PRIVILEGED and os.geteuid()!=0 and not user_flatpak:
         raise StoreError("System changes require App Store authentication.")
+    if action in jobs.ACTIONS and not user_flatpak and jobs.enabled():
+        return jobs.start(action,request)
+    if action=="transactions": return jobs.listing()
     if action=="catalog": return catalog.search(request)
     if action=="installed": return inventory.search(request)
     if action=="details": return catalog.details(request)

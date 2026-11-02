@@ -103,3 +103,15 @@ This is an App Store-only release for AmogOS 2.1. Other AmogOS packages and the 
 - Queue confirmations use a bottom-centred root-layer pill above pages and dialogs. It replaces the previous notice, has View queue and dismiss actions, and expires after four seconds without waiting for navigation or focus. Widget tests verify placement and interaction at widths 400 and 1280 and prove timer replacement and dismissal.
 
 Release checks: 39 backend tests, 24 Flutter tests, clean Flutter analysis, one-comment source audit, Linux release build, isolated real APT transactions and Plasma launch checks. Package and archive verification are recorded in the published release report.
+
+## App Store 0.1.6
+
+An installed AmogOS 2.1 VirtualBox guest showed the confirmed failure: restarting the desktop caused its user manager to kill the Store helper, apt-get, dpkg and update-mime-database together. That left shared-mime-info unconfigured until a manual dpkg command completed it. The journal did not establish an out-of-memory kill as the cause of the desktop restart.
+
+System APT and Flatpak transactions now run in independent system services. Closing the Store or restarting the desktop does not terminate their process groups. Root-owned, owner-readable journals retain progress and completion, and reopening the Store reconnects to the queue without replaying transactions. User Flatpak operations retain their existing account scope.
+
+Updates offers Repair interrupted installation. The review lists packages awaiting configuration; only after approval does the worker resume dpkg configuration and check package consistency. A normal install reports pending configuration and points to that repair action. Existing application Repair also includes pending configuration in its review.
+
+APT caches are explicitly closed before package commands run. Workers use lower CPU priority and a 256 MiB soft memory threshold; there is no hard memory cap that would force configuration to fail. Atomic progress snapshots preserve the owner's read ACL, and other users cannot read private requests or another user's receipts. Legacy root:root 0775 state parents are migrated to 0755; unsafe ownership and world-writable directories are refused.
+
+Validation includes 48 backend tests, 26 Flutter tests, clean analysis and a 103-file comment audit. A disposable real systemd target started from an unpacked package, terminated the Store-side client during its maintainer script, then verified independent completion, an empty dpkg audit, owner reconnection, and isolation from another user. The existing pill, source selection and responsive-layout tests continue to pass. This release changes only amogos-store; AmogOS remains 2.1 and no ISO is rebuilt.

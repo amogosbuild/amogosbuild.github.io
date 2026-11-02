@@ -34,6 +34,8 @@ class StoreController extends ChangeNotifier {
   final Map<String, Set<String>> updateSelections = {};
   final List<StoreJob> queue = [];
   Timer? _searchTimer;
+  Timer? _recoveryTimer;
+  bool _restoringTransactions = false;
   int _generation = 0, catalogPage = 0;
   bool _disposed = false;
   Future<void>? _initialization;
@@ -72,8 +74,61 @@ class StoreController extends ChangeNotifier {
   Future<void> initialize() => _initialization ??= _initialize();
   Future<void> _initialize() async {
     await service.initialize();
+    await restoreTransactions();
     await loadSources();
     await Future.wait([loadCatalog(), loadEssentials()]);
+  }
+
+  Future<void> restoreTransactions() async {
+    if (_disposed || _restoringTransactions || preview) return;
+    _restoringTransactions = true;
+    try {
+      final data = await service.request('transactions');
+      if (_disposed) return;
+      for (final raw in data['items'] ?? []) {
+        final value = Map<String, dynamic>.from(raw);
+        final id = value['transactionId'] as String;
+        var job = queue.where((j) => j.transactionId == id).firstOrNull;
+        if (job == null) {
+          job = StoreJob(
+            title: value['title'] as String? ?? 'Package changes',
+            source: value['source'] as String? ?? 'deb',
+            operation: value['operation'] as String? ?? 'install',
+            request: {'id': value['package'], 'transactionId': id},
+            review: {},
+          )..transactionId = id;
+          job.recovered = true;
+          queue.add(job);
+        }
+        job.status = value['status'] == 'completed'
+            ? JobStatus.completed
+            : value['status'] == 'failed'
+            ? JobStatus.failed
+            : JobStatus.running;
+        job.message = value['message'] as String? ?? job.activity;
+        job.progress = (value['progress'] as num?)?.toDouble();
+      }
+      final active = queue.any((j) => j.recovered && j.active);
+      if (active) {
+        _recoveryTimer ??= Timer.periodic(
+          const Duration(seconds: 2),
+          (_) => unawaited(restoreTransactions()),
+        );
+      } else {
+        _recoveryTimer?.cancel();
+        _recoveryTimer = null;
+        if (queue.any((j) => j.pending)) unawaited(_runQueue());
+      }
+      changed();
+    } catch (e) {
+      if (!_disposed) {
+        error =
+            'Could not reconnect to background package changes: ${clean(e)}';
+        changed();
+      }
+    } finally {
+      _restoringTransactions = false;
+    }
   }
 
   Future<void> loadSources() async {
@@ -296,7 +351,7 @@ class StoreController extends ChangeNotifier {
   }
 
   Future<void> _runQueue() async {
-    if (queueRunning) return;
+    if (queueRunning || queue.any((j) => j.recovered && j.active)) return;
     queueRunning = true;
     while (!_disposed) {
       final job = queue.where((j) => j.pending).firstOrNull;
@@ -343,6 +398,9 @@ class StoreController extends ChangeNotifier {
         job.status = JobStatus.running;
         changed();
         await for (final event in service.execute(action, body)) {
+          if (event['transactionId'] != null) {
+            job.transactionId = event['transactionId'] as String;
+          }
           job.message = event['message'] ?? job.activity;
           if (event['progress'] != null) {
             job.progress = (event['progress'] as num).toDouble().clamp(0, 1);
@@ -402,6 +460,7 @@ class StoreController extends ChangeNotifier {
   void dispose() {
     _disposed = true;
     _searchTimer?.cancel();
+    _recoveryTimer?.cancel();
     _notificationTimer?.cancel();
     notification.dispose();
     darkTheme.dispose();

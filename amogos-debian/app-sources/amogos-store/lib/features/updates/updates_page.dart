@@ -48,6 +48,20 @@ class UpdatesPage extends StatelessWidget {
                     ),
               child: const Text('Refresh APT indexes'),
             ),
+            OutlinedButton.icon(
+              onPressed: c.waitingCount > 0
+                  ? null
+                  : () => reviewTransaction(
+                      context,
+                      c,
+                      title: 'Interrupted package installation',
+                      source: 'deb',
+                      operation: 'repair-system',
+                      request: {'operation': 'repair-system', 'source': 'deb'},
+                    ),
+              icon: const Icon(Icons.build_outlined),
+              label: const Text('Repair interrupted installation'),
+            ),
           ],
         ),
         if (c.loading) const LinearProgressIndicator(minHeight: 2),
