@@ -1,0 +1,2 @@
+#!/bin/sh
+printf '%s\n' 'AmogOS 2.1 Pro (Debian edition) developed by CursedMC64 and techtimefor.'

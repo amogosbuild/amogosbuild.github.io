@@ -1,5 +1,6 @@
 # Installation applies a reviewed plan only in live media and confines configuration to the mounted target.
 import pathlib
+import os
 import pwd
 import re
 import shutil
@@ -13,6 +14,7 @@ from .storage import disk_by_path, read_table, shrink_limit
 from .bootloaders import Bootloader
 
 SYSTEM_PACKAGE = pathlib.Path('/usr/share/amogos-installer/amogos-system.deb')
+SYSTEM_VERSION = '2.1.0-2'
 
 
 def validate_settings(request):
@@ -179,6 +181,12 @@ class Installer:
             if percent:
                 self.report.emit("copy", .17 + .45 * int(percent.group(1)) / 100, "Copying AmogOS 2 Pro")
         self.runner.stream(["nice", "-n", "10", "unsquashfs", "-force", "-processors", "1", "-data-queue", "8", "-frag-queue", "8", "-percentage", "-d", str(self.target), str(medium / "live/filesystem.squashfs")], progress)
+        descriptor=os.open(self.target,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:
+            os.fchown(descriptor,0,0)
+            os.fchmod(descriptor,0o755)
+        finally:
+            os.close(descriptor)
         self.report.emit("copy", .63, "Your system files are in place")
 
     def _runtime(self):
@@ -286,9 +294,11 @@ class Installer:
             (self.target / "usr/sbin/policy-rc.d").unlink(missing_ok=True)
 
     def _ensure_system_core(self):
-        installed=self.chroot(["dpkg-query","-W","-f=${db:Status-Status}","amogos-system"],check=False)
-        if installed.returncode==0 and installed.stdout.strip()=="installed":
-            return
+        installed=self.chroot(["dpkg-query","-W","-f=${db:Status-Status} ${Version}","amogos-system"],check=False)
+        status=installed.stdout.split()
+        if installed.returncode==0 and len(status)==2 and status[0]=="installed":
+            if self.chroot(["dpkg","--compare-versions",status[1],"ge",SYSTEM_VERSION],check=False).returncode==0:
+                return
         package=SYSTEM_PACKAGE
         if not package.is_file():
             raise InstallError('The persistent AmogOS system package is missing from the live installer.')

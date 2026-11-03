@@ -16,7 +16,7 @@ spec.loader.exec_module(migration)
 
 
 class MigrationTests(unittest.TestCase):
-    def exercise(self,version,symlink=True):
+    def exercise(self,version,symlink=True,repaired=False):
         with tempfile.TemporaryDirectory() as temporary:
             root=pathlib.Path(temporary)
             for name in ('etc','usr/lib','bin'):
@@ -35,13 +35,16 @@ class MigrationTests(unittest.TestCase):
             def command(args,**kwargs):
                 if args[:2]==['dpkg','--compare-versions']:
                     return real_run(args,**kwargs)
+                if args==['/usr/libexec/amogos-root-ownership','--mark-reboot']:
+                    return subprocess.CompletedProcess(args,0,stdout='{"changed":'+str(repaired).lower()+'}')
                 return subprocess.CompletedProcess(args,0)
             mapped=types.SimpleNamespace(Path=lambda value:root/str(value).lstrip('/'))
             with patch.object(migration,'pathlib',mapped),patch.object(migration.os,'geteuid',return_value=0),patch.object(migration,'repositories') as repositories,patch.object(migration.subprocess,'run',side_effect=command),patch.object(migration.subprocess,'check_output',return_value='LOCAL\n'),contextlib.redirect_stdout(io.StringIO()) as output:
                 migration.main()
             after={str(p.relative_to(root)):(p.read_bytes(),p.stat().st_mtime_ns) for p in root.rglob('*') if p.is_file()}
             if version in ('2.1','2.1.1','2.2','3.0'):
-                self.assertEqual(output.getvalue(),'You are already on the latest AmogOS version\n')
+                message='AmogOS root ownership corrected. Restart to restore desktop graphics.' if repaired else 'You are already on the latest AmogOS version'
+                self.assertEqual(output.getvalue(),message+'\n')
                 self.assertEqual(before,after)
                 repositories.assert_not_called()
             else:
@@ -61,6 +64,9 @@ class MigrationTests(unittest.TestCase):
         for version in ('2.1','2.1.1','2.2','3.0'):
             with self.subTest(version=version):
                 self.exercise(version)
+
+    def test_current_version_still_repairs_root_without_rewriting_identity(self):
+        self.exercise('2.1',repaired=True)
 
 
 if __name__=='__main__':

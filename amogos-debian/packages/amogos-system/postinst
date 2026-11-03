@@ -2,5 +2,9 @@
 set -eu
 if [ "$1" = configure ] && command -v systemctl >/dev/null 2>&1; then
     systemctl enable amogos-installed-cleanup.service
+    systemctl enable amogos-root-ownership.service
+fi
+if [ "$1" = configure ]; then
+    /usr/libexec/amogos-root-ownership --mark-reboot
 fi
 exit 0

@@ -4,6 +4,7 @@
 5eee824bca8abdc681b4bd0d1879c0dbcf8983ae799037362acdbec013dcc34b  pool/main/a/amogos-installer/amogos-installer_0.1.4-1_amd64.deb
 74091477dacaba7cd626ec7812816b9fe6b9f8fa122ae5ac98ed39c40761d8ee  pool/main/a/amogos-installer/amogos-installer_0.1.4_amd64.deb
 c9eb9e3f67946e697884c2d904201db079d71b35cc777b3222ade324d5953161  pool/main/a/amogos-installer/amogos-installer_0.1.5_amd64.deb
+8fbd4616ad5ac5277d66493d14d18b0d9585bfd65efc3d9e706e2ae7d247436a  pool/main/a/amogos-installer/amogos-installer_0.1.6_amd64.deb
 ef7e412e1d8ecdfef6e1a675b9e9ec5608c7a3200ce8dc3134f03d5875f11a2b  pool/main/a/amogos-music/amogos-music_1.0.20~alpha2022_amd64.deb
 837cb041916c81b3d095be2309834ca5f80dee9082b27490c67c45923df4d5ab  pool/main/a/amogos-notes/amogos-notes_1.0.0-3_amd64.deb
 2407b0457f29974f8a0f5b3e9e0d008992bdb10f5d852b7b9de07a251b811deb  pool/main/a/amogos-store/amogos-store_0.1.3_amd64.deb
@@ -11,6 +12,8 @@ ef7e412e1d8ecdfef6e1a675b9e9ec5608c7a3200ce8dc3134f03d5875f11a2b  pool/main/a/am
 73b257f0a5fd50ee84b1b22d2e6dc80449a91c07488ca2ef03a1986956b21797  pool/main/a/amogos-store/amogos-store_0.1.5_amd64.deb
 09b78fc651be248a56fda91de16d33720ef318839ca848640e4b27f5aed4270f  pool/main/a/amogos-store/amogos-store_0.1.6_amd64.deb
 343a70af6678076e48c18b165414d02e7ba1d7662d7fd6a284fbfc5a1c018f1a  pool/main/a/amogos-system/amogos-system_2.1.0-1_all.deb
+e764f43fc6071ecea0771bc937e828d31f1940bfa32874aa756f79a99efa1d6b  pool/main/a/amogos-system/amogos-system_2.1.0-2_all.deb
 5a0ff25513cde8690dfe2318201ef2e7be26fda8e60799402385934f85cab2c3  pool/main/a/amogos-update/amogos-update_2.0.0-1_all.deb
 91a98252d5cccbd96f93876c9e52dc3e7e7982b81738d1c08378a9767175b44a  pool/main/a/amogos-update/amogos-update_2.1.0-1_all.deb
 c0a898c45863ad51701c0f733f8255bbc37f0ff4104142ea8b3b7504cf041976  pool/main/a/amogos-update/amogos-update_2.1.0-2_all.deb
+af096dd7bfa5dde670f95776258c641c91ee062611e6b2c82d55007c4a07185d  pool/main/a/amogos-update/amogos-update_2.1.0-3_all.deb

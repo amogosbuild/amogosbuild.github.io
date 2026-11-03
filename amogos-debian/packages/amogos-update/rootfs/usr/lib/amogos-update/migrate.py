@@ -1,5 +1,6 @@
 # The versioned 2.1 migration preserves vendor identity backups and never downgrades an updated system.
 import os
+import json
 import pathlib
 import re
 import shlex
@@ -61,8 +62,10 @@ def main():
     if current.get('ID')!='amogos':
         raise SystemExit('This system migration applies only to AmogOS.')
     version=current.get('OS_VERSION') or current.get('VERSION_ID','0')
+    maintenance=subprocess.run(['/usr/libexec/amogos-root-ownership','--mark-reboot'],check=True,capture_output=True,text=True)
+    repaired=json.loads(maintenance.stdout).get('changed',False)
     if subprocess.run(['dpkg','--compare-versions',version,'ge','2.1']).returncode==0:
-        print('You are already on the latest AmogOS version')
+        print('AmogOS root ownership corrected. Restart to restore desktop graphics.' if repaired else 'You are already on the latest AmogOS version')
         return
     repositories()
     owner=subprocess.check_output(['dpkg-divert','--listpackage','/usr/lib/os-release'],text=True).strip()

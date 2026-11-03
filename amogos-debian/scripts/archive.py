@@ -78,9 +78,10 @@ def build_package(source, destination, public_key=None, version=None, payload=No
                         path.chmod(0o755)
                     elif (resources/path.relative_to(stage)).is_file():
                         path.chmod(0o644)
-            executable=(stage/"usr/libexec/amogos-installed-cleanup")
-            if executable.exists():
-                executable.chmod(0o755)
+            for name in ('usr/bin/amogos-credits','usr/libexec/amogos-installed-cleanup','usr/libexec/amogos-root-ownership'):
+                executable=stage/name
+                if executable.exists():
+                    executable.chmod(0o755)
             configuration=["/"+str(path.relative_to(stage)).replace(os.sep,"/") for path in (stage/"etc").rglob("*") if path.is_file()] if (stage/"etc").exists() else []
             if configuration:
                 write(stage/"DEBIAN/conffiles","\n".join(sorted(configuration))+"\n")

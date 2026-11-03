@@ -1,10 +1,10 @@
 Package: amogos-update
-Version: 2.1.0-2
+Version: 2.1.0-3
 Section: admin
 Priority: optional
 Architecture: all
 Maintainer: AmogOS
-Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-1), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-2), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
 Description: Versioned AmogOS system update migrations
  Runs the packaged AmogOS migration script when a newer package version
  is configured by APT or dpkg. Release 2.1 repairs desktop application

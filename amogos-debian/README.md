@@ -59,6 +59,7 @@ Application sources are included in app-sources/.
     python3 scripts/validate-repository.py
     sudo python3 tests/test-updater.py
     python3 tests/test-migration.py
+    sudo python3 tests/test-system.py
     python3 tests/test-apt.py
 
 Run these commands from amogos-debian/. The builder packages maintained
@@ -84,6 +85,14 @@ isolated APT state and a loopback-only HTTP server to check update detection and
 authenticated downloads, including rejection of a corrupted package.
 test-updater.py uses a disposable minimal chroot and actual dpkg install,
 upgrade, failure/retry, reinstall, downgrade and purge operations.
+test-system.py requires squashfs-tools and systemd-tmpfiles; it checks persistent
+credits, live and installed root repair, and rejection of broken image metadata.
+
+The production ISO scripts and root metadata validator are retained in iso-tools/.
+Deploy build-iso and verify-root.py to /srv/chocolatier/scripts/ and
+build-final-iso.sh to /srv/chocolatier/cache/. The final builder verifies the
+editable root and newly packed SquashFS; the ISO assembly script independently
+checks the staged SquashFS. Incorrect metadata stops the build before ISO assembly.
 
 The application DEBs remain the tested Linux builds: Installer and App Store
 use Flutter 3.47.6; Music and Notes use Flutter 3.0.5. The staged OS installs the

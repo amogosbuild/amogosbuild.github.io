@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "environment": "live",
+      "system": "2.1.0-2",
+      "updater": "2.1.0-3",
+      "installer": "0.1.6",
+      "bundledSystem": "2.1.0-2",
+      "root": "0:0:0755",
+      "credits": "AmogOS 2.1 Pro (Debian edition) developed by CursedMC64 and techtimefor.",
+      "tmpfiles": "passed",
+      "unitVerification": "passed",
+      "userOwnershipPreserved": true,
+      "identityUnchanged": true,
+      "themePreserved": true,
+      "liveToolsRetained": true,
+      "dpkgAudit": "clean"
+    },
+    {
+      "environment": "installed",
+      "system": "2.1.0-2",
+      "updater": "2.1.0-3",
+      "installer": "0.1.6",
+      "bundledSystem": "2.1.0-2",
+      "root": "0:0:0755",
+      "credits": "AmogOS 2.1 Pro (Debian edition) developed by CursedMC64 and techtimefor.",
+      "tmpfiles": "passed",
+      "unitVerification": "passed",
+      "userOwnershipPreserved": true,
+      "identityUnchanged": true,
+      "themePreserved": true,
+      "liveToolsRetained": false,
+      "dpkgAudit": "clean"
+    }
+  ]
+}

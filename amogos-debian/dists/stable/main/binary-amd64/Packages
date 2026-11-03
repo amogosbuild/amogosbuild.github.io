@@ -95,6 +95,22 @@ Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
  Guided storage setup, dual-boot detection, manual partition assignment,
  bundled mini-games, and optional YouTube Music playback.
 
+Package: amogos-installer
+Version: 0.1.6
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core, amogos-system (>= 2.1.0-2)
+Filename: pool/main/a/amogos-installer/amogos-installer_0.1.6_amd64.deb
+Size: 7966100
+MD5sum: 9e9e1942006a878ceedcf9fe3fd2b07e
+SHA1: 77a80788b919002e2041b6ac31f1a51ff7547ac3
+SHA256: 8fbd4616ad5ac5277d66493d14d18b0d9585bfd65efc3d9e706e2ae7d247436a
+Section: admin
+Priority: optional
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.
+
 Package: amogos-music
 Version: 1.0.20~alpha2022
 Architecture: amd64
@@ -216,6 +232,24 @@ Description: Persistent AmogOS boot theme and system defaults
  Retains the boot animation and low-memory system configuration after the
  live-session installation tools have been removed.
 
+Package: amogos-system
+Version: 2.1.0-2
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 127
+Depends: plymouth, initramfs-tools, python3, fonts-dejavu-core
+Replaces: amogos-installer (<< 0.1.5)
+Filename: pool/main/a/amogos-system/amogos-system_2.1.0-2_all.deb
+Size: 33108
+MD5sum: 94557c3cae068278b6d2e8e22078a8e5
+SHA1: 8cb668ad086e09a11970bb65c1906b83a0d79d46
+SHA256: e764f43fc6071ecea0771bc937e828d31f1940bfa32874aa756f79a99efa1d6b
+Section: admin
+Priority: optional
+Description: Persistent AmogOS boot theme and system defaults
+ Retains the boot animation, root ownership protection, credits command and
+ low-memory defaults after the live-session installation tools are removed.
+
 Package: amogos-update
 Version: 2.0.0-1
 Architecture: all
@@ -262,6 +296,24 @@ Size: 3112
 MD5sum: 901a62e3158387e2346b28d3c599790a
 SHA1: cb34dd90e4dad6ab35b18f5120d193fdf309ed2f
 SHA256: c0a898c45863ad51701c0f733f8255bbc37f0ff4104142ea8b3b7504cf041976
+Section: admin
+Priority: optional
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. Release 2.1 repairs desktop application
+ compatibility, repository defaults and installed-system identity.
+
+Package: amogos-update
+Version: 2.1.0-3
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 22
+Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-2), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Filename: pool/main/a/amogos-update/amogos-update_2.1.0-3_all.deb
+Size: 3226
+MD5sum: d1da3b9d88b3add30810a84c3cc7424a
+SHA1: e565f6b0d4f1d26460c55c2fb3d313d4ac13e7a9
+SHA256: af096dd7bfa5dde670f95776258c641c91ee062611e6b2c82d55007c4a07185d
 Section: admin
 Priority: optional
 Description: Versioned AmogOS system update migrations

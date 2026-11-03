@@ -1,0 +1,14 @@
+# Repair image-root metadata before runtime directory setup in live and installed sessions.
+[Unit]
+Description=Ensure correct AmogOS filesystem root ownership
+DefaultDependencies=no
+After=local-fs.target
+Before=systemd-tmpfiles-setup.service sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/amogos-root-ownership
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target

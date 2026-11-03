@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+workspace=/srv/chocolatier
+filename=${1:-AmogOS-Chocolatier-GRUB-BIOS-UEFI.iso}
+[[ "$filename" =~ ^[A-Za-z0-9._-]+\.iso$ ]] || { echo "Use an ISO filename without directories"; exit 2; }
+exec 8>"$workspace/logs/build-iso.lock"
+flock -n 8 || { echo "An ISO build is already running"; exit 1; }
+output="$workspace/output/$filename"
+test ! -e "$output" || { echo "Output already exists: $output"; exit 1; }
+python3 "$workspace/scripts/verify-root.py" --squashfs "$workspace/iso-tree/live/filesystem.squashfs"
+"$workspace/enter-bootstrap" /bin/bash -euc '
+grub-script-check /work/iso-tree/boot/grub/grub.cfg
+grub-mkrescue --locales="" --themes="" --product-name=AmogOS --product-version=2 -o "/work/output/$1.partial" -V AMOGOS_CHOC /work/iso-tree
+' bash "$filename"
+mv -- "$output.partial" "$output"
+xorriso -indev "$output" -report_el_torito plain -report_system_area plain > "$workspace/logs/$filename.boot-layout.txt" 2>&1
+(cd "$workspace/output"; sha256sum "$filename" > "$filename.sha256")
+echo "Built $output"
