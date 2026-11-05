@@ -1,13 +1,16 @@
 # Read-only ISO checks compare the shipped store, helper, and original character assets to their sources.
 import hashlib
 import json
+import os
 import pathlib
 import re
 import subprocess
 import sys
 import tempfile
 
-w=pathlib.Path("/srv/chocolatier")
+w=pathlib.Path(os.environ["AMOGOS_BUILD_DIR"]).resolve(strict=True)
+if w == pathlib.Path("/"):
+    raise SystemExit("Use a dedicated prepared build workspace.")
 name=sys.argv[1]
 if not re.fullmatch(r"[A-Za-z0-9._-]+\.iso",name):
     raise SystemExit("Use an ISO basename.")

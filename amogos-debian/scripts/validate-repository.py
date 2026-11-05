@@ -7,6 +7,7 @@ import html.parser
 import json
 import lzma
 import pathlib
+import re
 import subprocess
 import tempfile
 import urllib.parse
@@ -81,6 +82,10 @@ for path in ROOT.parent.rglob("*"):
     require(not any(part in (".gnupg", "private-keys-v1.d", "openpgp-revocs.d") for part in path.parts), "Private key directory in public repository")
     if path.suffix == ".asc":
         require(b"PRIVATE KEY" not in path.read_bytes(), "Private signing key in public repository")
+    if path.suffix in ('.md','.py','.sh','.ps1','.yml','.yaml') or path.name=='build-iso':
+        source=path.read_text(encoding='utf-8')
+        require(not re.search(r'/(?:srv)/[A-Za-z0-9_.-]+',source), 'Use AMOGOS_BUILD_DIR instead of an internal deployment path: '+str(path.relative_to(ROOT.parent)))
+        require(not re.search(r'(?i)\b[A-Z]:[/\\]Users[/\\][A-Za-z0-9_.-]+',source), 'Personal home directory in public source: '+str(path.relative_to(ROOT.parent)))
 require((ROOT.parent / ".nojekyll").is_file(), "The GitHub Pages static-file marker is missing")
 class Links(html.parser.HTMLParser):
     def handle_starttag(self, tag, attributes):

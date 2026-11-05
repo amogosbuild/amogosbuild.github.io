@@ -44,9 +44,9 @@ SHA-256/SHA-512 by-hash indexes and [package checksums](SHA256SUMS) are included
 ## Build and sign changes
 
 Use Linux with Python 3.11 or newer, dpkg-dev, GnuPG and the standard coreutils.
-The initial private signing key remains in the root-only VPS directory
-/srv/chocolatier/repository-keys/amogos-archive. Back up that directory securely;
-never add it, private exports or revocation certificates to this repository.
+Keep your private signing key in a protected GnuPG directory outside this
+checkout. Set AMOGOS_SIGNING_HOME to that directory and keep a private backup.
+Never add private keys, private exports or revocation certificates to this repository.
 
 To update an application, copy its newly built DEB into
 pool/main/a/PACKAGE-NAME/. Keep existing versioned filenames intact.
@@ -54,7 +54,7 @@ The migration, persistent system defaults and keyring sources live in packages/.
 Application sources are included in app-sources/.
 
     python3 scripts/build-repository.py \
-      --gnupg-home /srv/chocolatier/repository-keys/amogos-archive \
+      --gnupg-home "$AMOGOS_SIGNING_HOME" \
       --signing-key AD0DEB95462DBF4C6C4F3A5571447013FAF2C774
     python3 scripts/validate-repository.py
     sudo python3 tests/test-updater.py
@@ -89,8 +89,13 @@ test-system.py requires squashfs-tools and systemd-tmpfiles; it checks persisten
 credits, live and installed root repair, and rejection of broken image metadata.
 
 The production ISO scripts and root metadata validator are retained in iso-tools/.
-Deploy build-iso and verify-root.py to /srv/chocolatier/scripts/ and
-build-final-iso.sh to /srv/chocolatier/cache/. The final builder verifies the
+Set AMOGOS_BUILD_DIR to your prepared build workspace. Deploy build-iso and
+verify-root.py to "$AMOGOS_BUILD_DIR/scripts/" and build-final-iso.sh to
+"$AMOGOS_BUILD_DIR/cache/". These helpers expect existing rootfs/, iso-tree/,
+bootstrap/, cache/, logs/ and output/ directories and an enter-bootstrap wrapper;
+they do not bootstrap a complete ISO build environment from this checkout.
+The application staging helpers also use that explicit workspace variable.
+The final builder verifies the
 editable root and newly packed SquashFS; the ISO assembly script independently
 checks the staged SquashFS. Incorrect metadata stops the build before ISO assembly.
 

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
-workspace=/srv/chocolatier
+workspace=$(realpath -e "${AMOGOS_BUILD_DIR:?Set AMOGOS_BUILD_DIR to your prepared build workspace}")
+test "$workspace" != /
 filename=${1:-AmogOS-Chocolatier-Installer-$(date -u +%Y%m%dT%H%M%SZ).iso}
 [[ "$filename" =~ ^[A-Za-z0-9._-]+\.iso$ ]] || { echo "Use a filename without directories"; exit 2; }
 test ! -e "$workspace/output/$filename"

@@ -1,8 +1,8 @@
-# Build a fresh Windows preview on the spacious drive while keeping the maintained source in Documents.
-param([string]$OutputRoot='D:\CodexAmogOSBuild-20261031')
+# Build a fresh Windows preview in a configurable local output directory.
+param([string]$OutputRoot=(Join-Path $env:TEMP 'amogos-store-builds'), [string]$FlutterCommand='flutter')
 $ErrorActionPreference='Stop'
 $taskProject=Split-Path $PSScriptRoot -Parent
-$taskFlutter=Join-Path $env:USERPROFILE 'Downloads\flutter_windows_3.47.6-stable\flutter\bin\flutter.bat'
+$taskFlutter=(Get-Command $FlutterCommand -CommandType Application -ErrorAction Stop).Source
 $taskStamp=Get-Date -Format 'yyyyMMdd-HHmmss'
 $taskBuild=Join-Path $OutputRoot ('preview-'+$taskStamp)
 $taskArchive=Join-Path $OutputRoot ('preview-source-'+$taskStamp+'.tar.gz')

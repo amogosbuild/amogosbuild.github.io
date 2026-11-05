@@ -1,6 +1,7 @@
 # The Pro VM harness verifies a preserved external ESP and both installed bootloader choices.
 import datetime
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -10,7 +11,9 @@ import sys
 import time
 from PIL import Image
 
-W = pathlib.Path("/srv/chocolatier")
+W = pathlib.Path(os.environ["AMOGOS_BUILD_DIR"]).resolve(strict=True)
+if W == pathlib.Path("/"):
+    raise SystemExit("Use a dedicated prepared build workspace.")
 ISO = pathlib.Path(sys.argv[1]) if len(sys.argv)>1 else W/"output/AmogOS-2-Pro-Installer-checkpoint005.iso"
 assert ISO.is_file()
 RUN = W/"logs"/("pro-boot-"+datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ"))

@@ -1,6 +1,7 @@
 # The VM harness installs onto a fresh disposable image and boots it under BIOS and UEFI.
 import datetime
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -8,7 +9,9 @@ import socket
 import subprocess
 import time
 
-W = pathlib.Path("/srv/chocolatier")
+W = pathlib.Path(os.environ["AMOGOS_BUILD_DIR"]).resolve(strict=True)
+if W == pathlib.Path("/"):
+    raise SystemExit("Use a dedicated prepared build workspace.")
 RUN = W / "logs" / ("installer-vm-" + datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
 RUN.mkdir()
 ISO = W / "output/AmogOS-Chocolatier-Installer-checkpoint002.iso"

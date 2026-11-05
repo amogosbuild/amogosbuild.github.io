@@ -31,34 +31,33 @@ This is a development checkpoint for continued AmogOS 2 Pro work.
   live kernel to SDDM in QEMU (143.4 seconds).
 
 These real package tests were confined to the Debian build chroot, including a
-dedicated storetest user for AppImage operations. They did not upgrade the VPS.
+dedicated storetest user for AppImage operations. They did not upgrade the build host.
 The system-update resolver was checked against the editable AmogOS rootfs.
 Interactive polkit authentication and physical-desktop validation remain for
 normal user testing on the ISO.
 
 ## Artifacts and logs
 
-Source: /srv/chocolatier/apps/app_store
+Source: $AMOGOS_BUILD_DIR/apps/app_store
 
-Package: /srv/chocolatier/apps/app_store/dist/amogos-store_0.1.1_amd64.deb
+Package: $AMOGOS_BUILD_DIR/apps/app_store/dist/amogos-store_0.1.1_amd64.deb
 
-- /srv/chocolatier/logs/store-integration.log
-- /srv/chocolatier/logs/store-linux-build.log
-- /srv/chocolatier/logs/store-unit-tests.log
-- /srv/chocolatier/logs/store-comment-audit.log
-- /srv/chocolatier/logs/store-native-check.log
-- /srv/chocolatier/logs/AmogOS-2-Pro-App-Store-checkpoint007-verification.json
-- /srv/chocolatier/logs/checkpoint007-boot-result.json
-- /srv/chocolatier/logs/store-source-sha256.json
+- $AMOGOS_BUILD_DIR/logs/store-integration.log
+- $AMOGOS_BUILD_DIR/logs/store-linux-build.log
+- $AMOGOS_BUILD_DIR/logs/store-unit-tests.log
+- $AMOGOS_BUILD_DIR/logs/store-comment-audit.log
+- $AMOGOS_BUILD_DIR/logs/store-native-check.log
+- $AMOGOS_BUILD_DIR/logs/AmogOS-2-Pro-App-Store-checkpoint007-verification.json
+- $AMOGOS_BUILD_DIR/logs/checkpoint007-boot-result.json
+- $AMOGOS_BUILD_DIR/logs/store-source-sha256.json
 
 Development ISO:
 
-    /srv/chocolatier/output/AmogOS-2-Pro-App-Store-checkpoint007.iso
+    $AMOGOS_BUILD_DIR/output/AmogOS-2-Pro-App-Store-checkpoint007.iso
 
 Windows screenshots under build/previews include the home screen in both themes,
 system updates, sources, app source selection, active queue, and Flatpak-required
-screen. The project keeps generated Windows build data on D: through junctions
-because C: has very little free space.
+screen. Generated Windows build data is kept in a separate local output directory.
 
 
 ## Staged fixes: 0.1.2
@@ -74,7 +73,7 @@ No ISO was rebuilt for these changes. The updated package is installed in the ed
 - A listing selector exposes alternative AppImageHub entries. VLC AppImage details also resolve the verified APT and Flatpak alternatives.
 - Existing checkpoint009.iso still matches its original SHA-256 checksum.
 
-Native screenshots and menu results are copied to the Windows build/previews directory. The isolated test packages were confined to the build chroot, not the VPS host.
+Native screenshots and menu results are copied to the Windows build/previews directory. The isolated test packages were confined to the build chroot, not the build host.
 
 ## Staged 0.1.3 checks
 

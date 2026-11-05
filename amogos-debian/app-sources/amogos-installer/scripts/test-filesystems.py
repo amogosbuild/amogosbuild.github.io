@@ -13,7 +13,9 @@ from amogos_install.planner import GIB, MIB, make_plan
 from amogos_install.runtime import Reporter, Runner, private_mounts
 from amogos_install.storage import read_table, shrink_limit
 
-WORK = pathlib.Path("/srv/chocolatier/cache/storage-tests")
+WORK = pathlib.Path(os.environ["AMOGOS_BUILD_DIR"]).resolve(strict=True) / "cache/storage-tests"
+if WORK.parent.parent == pathlib.Path("/"):
+    raise SystemExit("Use a dedicated prepared build workspace.")
 WORK.mkdir(parents=True, exist_ok=True)
 runner = Runner()
 private_mounts(runner)

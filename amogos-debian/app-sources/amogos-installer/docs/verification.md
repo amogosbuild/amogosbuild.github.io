@@ -15,7 +15,7 @@ AmogOS 2 Pro remains a development checkpoint for further ISO changes.
   preserved file bytes, filesystem UUIDs, partition starts/GUIDs, and EFI contents.
 - Live InnerTube check: the exact Installer Music playlist returned ten tracks
   and a playable, range-validated audio stream.
-- The privileged backend refused non-live disk installation on the VPS.
+- The privileged backend refused non-live disk installation on a non-live build host.
 - Live Plymouth rendered the AmogOS 2 Pro title, moving text highlight, and
   sliding gradient light, and continued into userspace without input.
 - A complete installation onto a disposable 32 GiB QEMU root disk using an
@@ -43,21 +43,21 @@ Physical Windows/Linux dual-boot machines and NVIDIA hardware have not yet been
 tested. Automatic shrinking is limited to eligible NTFS/ext4; encrypted and
 unsupported layouts need space prepared separately.
 
-## Evidence on the VPS
+## Build evidence
 
-- /srv/chocolatier/logs/test-pro-boot.log
-- /srv/chocolatier/logs/latest-pro-boot.txt
-- /srv/chocolatier/logs/pro-boot-20261031T171359Z/
-- /srv/chocolatier/logs/checkpoint006-boot-result.json
-- /srv/chocolatier/logs/AmogOS-2-Pro-Installer-checkpoint006-verification.json
-- /srv/chocolatier/logs/pro-checkpoint006-build.log
-- /srv/chocolatier/logs/test-filesystems.log
-- /srv/chocolatier/logs/installer-comment-audit.log
-- /srv/chocolatier/logs/installer-source-sha256.json
+- $AMOGOS_BUILD_DIR/logs/test-pro-boot.log
+- $AMOGOS_BUILD_DIR/logs/latest-pro-boot.txt
+- $AMOGOS_BUILD_DIR/logs/pro-boot-20261031T171359Z/
+- $AMOGOS_BUILD_DIR/logs/checkpoint006-boot-result.json
+- $AMOGOS_BUILD_DIR/logs/AmogOS-2-Pro-Installer-checkpoint006-verification.json
+- $AMOGOS_BUILD_DIR/logs/pro-checkpoint006-build.log
+- $AMOGOS_BUILD_DIR/logs/test-filesystems.log
+- $AMOGOS_BUILD_DIR/logs/installer-comment-audit.log
+- $AMOGOS_BUILD_DIR/logs/installer-source-sha256.json
 
 Current ISO:
 
-    /srv/chocolatier/output/AmogOS-2-Pro-Installer-checkpoint006.iso
+    $AMOGOS_BUILD_DIR/output/AmogOS-2-Pro-Installer-checkpoint006.iso
 
 Rendered interface and real VM boot captures are under build/previews in the
 Windows workspace. The original ISO and earlier checkpoints are preserved.

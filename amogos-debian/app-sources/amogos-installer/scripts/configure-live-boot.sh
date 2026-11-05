@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
-workspace=${1:-/srv/chocolatier}
-test "$workspace" = /srv/chocolatier
+workspace=$(realpath -e "${1:-${AMOGOS_BUILD_DIR:?Set AMOGOS_BUILD_DIR to your prepared build workspace}}")
+test "$workspace" != /
 project="$workspace/apps/installer"
 root="$workspace/rootfs"
 grep -q '^ID=amogos$' "$root/etc/os-release"
@@ -16,9 +16,11 @@ Theme=amogos2pro
 ShowDelay=0
 DeviceTimeout=8
 EOF
-python3 - <<'PY'
+python3 - "$workspace" <<'PY'
 from pathlib import Path
-root=Path('/srv/chocolatier/rootfs')
+import sys
+workspace=Path(sys.argv[1])
+root=workspace/'rootfs'
 path=root/'etc/os-release'
 values={'PRETTY_NAME':'"AmogOS 2 Pro 2.1 (toppat)"','NAME':'"AmogOS 2 Pro"','VERSION_ID':'"2.1"','OS_VERSION':'"2.1"','VERSION':'"2.1 (toppat)"'}
 lines=[line.split('=',1)[0]+'='+values[line.split('=',1)[0]] if line.split('=',1)[0] in values else line for line in path.read_text().splitlines() if not line.startswith('# AmogOS identity is retained')]
@@ -27,7 +29,7 @@ lines.extend(key+'='+value for key,value in values.items() if key not in present
 path.write_text('\n'.join(lines)+'\n')
 (root/'etc/issue').write_text('AmogOS 2 Pro 2.1 (toppat) \\n \\l\n\n')
 (root/'etc/issue.net').write_text('AmogOS 2 Pro 2.1 (toppat)\n')
-path=Path('/srv/chocolatier/iso-tree/boot/grub/grub.cfg')
+path=workspace/'iso-tree/boot/grub/grub.cfg'
 path.write_text(path.read_text().replace('AmogOS Live','AmogOS 2 Pro Live'))
 PY
 kernel="$(find "$root/boot" -maxdepth 1 -type f -name 'vmlinuz-*' -printf '%f\n' | sort -V | tail -n 1)"

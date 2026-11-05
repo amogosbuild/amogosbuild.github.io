@@ -1,7 +1,7 @@
 # Asset provenance
 
-The seven shopper images are unmodified copies of the user's
-C:/Users/Kebab/Pictures/appstoreamog directory.
+The seven shopper images were supplied by the AmogOS project and are retained
+unchanged under assets/characters/.
 
 Application icons and the VLC featured screenshot came from the corresponding
 Flathub AppStream records at https://flathub.org/api/v2/appstream/:

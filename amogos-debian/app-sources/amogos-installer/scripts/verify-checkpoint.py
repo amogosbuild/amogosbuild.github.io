@@ -1,13 +1,16 @@
 # Read-only ISO verification compares the packaged app, backend, and splash against maintained sources.
 import hashlib
 import json
+import os
 import pathlib
 import re
 import subprocess
 import sys
 import tempfile
 
-workspace = pathlib.Path("/srv/chocolatier")
+workspace = pathlib.Path(os.environ["AMOGOS_BUILD_DIR"]).resolve(strict=True)
+if workspace == pathlib.Path("/"):
+    raise SystemExit("Use a dedicated prepared build workspace.")
 name = sys.argv[1]
 assert re.fullmatch(r"[A-Za-z0-9._-]+\.iso", name)
 iso = workspace/"output"/name

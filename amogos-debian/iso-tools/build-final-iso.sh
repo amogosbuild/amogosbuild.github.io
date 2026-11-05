@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
-workspace=/srv/chocolatier
+workspace=$(realpath -e "${AMOGOS_BUILD_DIR:?Set AMOGOS_BUILD_DIR to your prepared build workspace}")
+test "$workspace" != /
 name=${1:-AmogOS-2.1-Pro-toppat-$(date -u +%F).iso}
 [[ "$name" =~ ^[A-Za-z0-9._-]+\.iso$ ]] || { echo "Use an ISO filename without directories"; exit 2; }
 root="$workspace/rootfs"

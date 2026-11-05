@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
-workspace=/srv/chocolatier
+workspace=$(realpath -e "${AMOGOS_BUILD_DIR:?Set AMOGOS_BUILD_DIR to your prepared build workspace}")
+test "$workspace" != /
 filename=${1:-AmogOS-Chocolatier-GRUB-BIOS-UEFI.iso}
 [[ "$filename" =~ ^[A-Za-z0-9._-]+\.iso$ ]] || { echo "Use an ISO filename without directories"; exit 2; }
 exec 8>"$workspace/logs/build-iso.lock"

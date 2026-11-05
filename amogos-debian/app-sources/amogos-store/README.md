@@ -26,13 +26,11 @@ session-stable semi-rare and rare appearances.
 
 Windows is explicitly a design preview with sample catalog data. Package
 changes are enabled only in the Linux build. The Windows build and SDK test
-temporary files use D:/CodexAmogOSBuild-20261031 because C: is nearly full;
-build and .dart_tool in this project are junctions to preserved generated output.
-The Windows build script makes a fresh build copy on D: to avoid stale compiler
-caches. The current native preview is under windows-preview-source/build/windows/
-x64/runner/Release in that D: directory.
-
-VPS source: /srv/chocolatier/apps/app_store
+temporary files use a separate local output directory. The Windows build script
+makes a fresh source copy to avoid stale compiler caches. Put Flutter on PATH,
+or pass -FlutterCommand to select its executable, and use -OutputRoot to choose
+the output directory. The native preview is under build/windows/x64/runner/Release
+inside the generated build copy.
 
 Application ID: amogos.appstore. Launch with amogos-appstore from a terminal.
 The former amogos-store command remains an alias.
@@ -46,7 +44,8 @@ validation evidence. Each maintained source file has one comment.
 The MCPI card uses the official supported Flathub build and links to:
 https://gitea.thebrokenrail.com/minecraft-pi-reborn/minecraft-pi-reborn/releases/latest
 
-The original ISO and previous checkpoints remain available for continued work.
+ISO verification helpers require a prepared workspace selected by
+AMOGOS_BUILD_DIR; application packaging alone does not assemble a complete ISO.
 
 
 Compact windows use a scrolling navigation drawer and responsive grids. Pages and dialogs are tested at 360×640, 640×480, 800×600 and 1024×600 with 130% text. Native windows start within the monitor work area.
