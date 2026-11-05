@@ -1,5 +1,8 @@
 # AmogOS App Store
 
+Complete Debian ISO builds are maintained in
+[AmogOS-2.x-Builder](https://github.com/amogosbuild/AmogOS-2.x-Builder).
+
 Flutter 3.47.6 App Store for AmogOS 2 Pro. The interface follows the supplied
 reference: black background, rose sidebar, green install action, animated
 selection dot, and bold selected navigation. Light mode is also included.

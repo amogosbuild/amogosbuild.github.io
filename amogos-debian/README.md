@@ -88,7 +88,13 @@ upgrade, failure/retry, reinstall, downgrade and purge operations.
 test-system.py requires squashfs-tools and systemd-tmpfiles; it checks persistent
 credits, live and installed root repair, and rejection of broken image metadata.
 
-The production ISO scripts and root metadata validator are retained in iso-tools/.
+The complete Debian ISO build configuration is maintained separately in
+[AmogOS-2.x-Builder](https://github.com/amogosbuild/AmogOS-2.x-Builder).
+It bootstraps an empty Debian filesystem, installs the AmogOS packages, stages
+the desktop and offline drivers, and assembles the hybrid ISO. Its amogos-arch/
+folder is reserved for future work.
+
+The older final-stage ISO scripts and root metadata validator are retained in iso-tools/.
 Set AMOGOS_BUILD_DIR to your prepared build workspace. Deploy build-iso and
 verify-root.py to "$AMOGOS_BUILD_DIR/scripts/" and build-final-iso.sh to
 "$AMOGOS_BUILD_DIR/cache/". These helpers expect existing rootfs/, iso-tree/,

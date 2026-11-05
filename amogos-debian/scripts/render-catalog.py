@@ -29,7 +29,7 @@ body{max-width:1100px;margin:auto;padding:36px 24px 60px;line-height:1.6}a{color
 </style>
 </head>
 <body>
-<header><div class="eyebrow">AmogOS 2 Pro · stable</div><h1>Your AmogOS apps.<br>One signed repository.</h1><p>Installer, App Store, Music and Notes for Debian 13 amd64, plus the AmogOS system update package.</p><nav aria-label="Repository links"><a href="#setup">Set up APT</a><a href="#packages">Download packages</a><a href="https://github.com/amogosbuild/amogosbuild.github.io/tree/main/amogos-debian">Source and maintenance guide</a></nav></header>
+<header><div class="eyebrow">AmogOS 2 Pro · stable</div><h1>Your AmogOS apps.<br>One signed repository.</h1><p>Installer, App Store, Music and Notes for Debian 13 amd64, plus the AmogOS system update package.</p><nav aria-label="Repository links"><a href="#setup">Set up APT</a><a href="#packages">Download packages</a><a href="https://github.com/amogosbuild/amogosbuild.github.io/tree/main/amogos-debian">Source and maintenance guide</a><a href="https://github.com/amogosbuild/AmogOS-2.x-Builder">Build the ISO</a></nav></header>
 <main>
 <section id="setup"><h2>Set up the repository</h2><p>Download and review the setup script, then run it as root. It verifies the keyring package checksum, configures the scoped signing key and refreshes APT.</p><pre><code>curl --fail --location --output install.sh \\
   https://amogosbuild.github.io/amogos-debian/install.sh

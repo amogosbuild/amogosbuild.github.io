@@ -14,6 +14,7 @@ plus a versioned system update package. It targets **Debian 13 amd64**.
 - [Package versions and direct DEB downloads](amogos-debian/PACKAGES.md)
 - [How system update migrations work](amogos-debian/docs/system-updates.md)
 - [Public package catalog](https://amogosbuild.github.io/amogos-debian/)
+- [AmogOS 2.x ISO Builder](https://github.com/amogosbuild/AmogOS-2.x-Builder) — complete Debian image build configuration; Arch is reserved.
 
 The amogos-arch directory remains reserved for the future Arch project.
 Debian supplies the ordinary system packages; this archive adds AmogOS packages.
