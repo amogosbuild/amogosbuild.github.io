@@ -40,6 +40,12 @@ glibc 2.41 or newer.
 
 ## Binaries
 
+[AppImage and DEB downloads on Filekiwi](https://file.kiwi/a965eb16#uL99ozozQdocIijSswjr-A)
+were uploaded on 10 November 2026. Filekiwi downloads are temporary.
+The [DEB in the signed APT archive](../pool/main/a/amogos-music/amogos-music_1.0.22~alpha2027_amd64.deb)
+remains available for repository users.
+
+
 | File | Bytes | SHA-256 |
 | --- | ---: | --- |
 | amogos-music_1.0.22~alpha2027_amd64.deb | 8975844 | 41d1d7a6502839b7ecfa72602f63b2b48890da9e94836eb6b73327418032b77c |
