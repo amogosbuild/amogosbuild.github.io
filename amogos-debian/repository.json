@@ -4,7 +4,7 @@
   "codename": "chocolatier",
   "supportedSystem": "Debian 13 amd64",
   "signingFingerprint": "AD0DEB95462DBF4C6C4F3A5571447013FAF2C774",
-  "generatedUtc": "2026-11-03T00:07:10.141134+00:00",
+  "generatedUtc": "2026-11-10T03:30:01.898855+00:00",
   "packages": [
     {
       "package": "amogos-archive-keyring",
@@ -69,6 +69,14 @@
       "filename": "pool/main/a/amogos-music/amogos-music_1.0.20~alpha2022_amd64.deb",
       "bytes": 8699700,
       "sha256": "ef7e412e1d8ecdfef6e1a675b9e9ec5608c7a3200ce8dc3134f03d5875f11a2b"
+    },
+    {
+      "package": "amogos-music",
+      "version": "1.0.22~alpha2027",
+      "architecture": "amd64",
+      "filename": "pool/main/a/amogos-music/amogos-music_1.0.22~alpha2027_amd64.deb",
+      "bytes": 8975844,
+      "sha256": "41d1d7a6502839b7ecfa72602f63b2b48890da9e94836eb6b73327418032b77c"
     },
     {
       "package": "amogos-notes",

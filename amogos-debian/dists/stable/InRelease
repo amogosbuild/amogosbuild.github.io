@@ -6,23 +6,23 @@ Label: AmogOS 2 Pro
 Suite: stable
 Codename: chocolatier
 Version: 2.1
-Date: Tue, 03 Nov 2026 00:07:10 +0000
+Date: Tue, 10 Nov 2026 03:30:01 +0000
 Architectures: amd64
 Components: main
 Acquire-By-Hash: yes
 Description: AmogOS 2 Pro applications and versioned system updates for Debian 13
 SHA256:
- 5b98a58adfd99e58ae1f351eff276864fa8977a41b9a194952b6435191216cb8 16092 main/binary-amd64/Packages
- 4647ed7cc67dff1e35ff4c4ca026845e9b7a5d03b7d638fccbf82ad4fb7113a2 3685 main/binary-amd64/Packages.gz
- beb2168dfbf3f0f15da5c849e909287b03ad1a8366ecea0b99a9c956944befa4 3492 main/binary-amd64/Packages.xz
+ 8c28a0af56af775cf612379f223cecd73ff5e15a887ab9380a607b76e7d6968d 16883 main/binary-amd64/Packages
+ a0e0adf6baac32ac526f97d11f3240e81a31d02bca22d273d81a3bae43fefa25 3805 main/binary-amd64/Packages.gz
+ 8e5f70de49f9605ba8c453fb24c27c8817c7887e5398f982f8a837e0d9b2df41 3584 main/binary-amd64/Packages.xz
 SHA512:
- 66ceaa5fc6f99856905b1bcbba8336e354fe8604d00f09ca3a928507462e0ea7c347528c17b9b8915cb1c51a911a50efff4d24e026f60c854d3bc72756d80ce1 16092 main/binary-amd64/Packages
- 05634b54efe0e6c4fd20c5e2da9eb733013557915816ea8878fd10eabae8c93cb1f98b9df752f879eaa40ba41a44ea9b5d71a915d3069989b1d103fb37fbb109 3685 main/binary-amd64/Packages.gz
- 4fcdfabd081d50e05dfb03263c57f012215c37811479b3aeafc36d301ad00f1012d3bd587b03d4b971662e057f44a42a40274cd7fb52f067d623fbf230ceb3b3 3492 main/binary-amd64/Packages.xz
+ 6fe632394be560c07470b637b1b202d24a531bd5c874a755b09349263876838ace00225100212c85bf5d9f5552641294387e967e68359577784ffbdf052b379f 16883 main/binary-amd64/Packages
+ 5584d6726392a2d78d6c2ff09a2a32282f3316a437217568b51a0d8fdde343556ba6454b3bd04d118c4d1666c2ee925203afc08eaa7dfee75f3074867a07afdc 3805 main/binary-amd64/Packages.gz
+ af8b6969195705f6e455e258f0c0405e18c2d1dc934a351470607ea9b192c41cb680d49a665b96da0b83365db55d3ebf2050f07593ede14f4c7b8c6a77c504b2 3584 main/binary-amd64/Packages.xz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYIAB0WIQStDeuVRi2/TGxPOlVxRHAT+vLHdAUCauklrgAKCRBxRHAT+vLH
-dGA3AQDmkm4pf9ZVTZMlaAnzSPccEtH+lczIJ/jdT37jTW1OZQEAxyouD4C4usQQ
-yRwwj5qJz09W+famJ90FzFyaRvUQkAI=
-=cnOJ
+iHUEARYIAB0WIQStDeuVRi2/TGxPOlVxRHAT+vLHdAUCavKPuQAKCRBxRHAT+vLH
+dI4KAQCIwRNCmd+rKfBOGxp7HTYM6omYA4q19dWyniXzFimJlwD/Wv+mzM9o/EL2
+2gjA2/M3WQIRfu7PhoWz7odG81Xj5Qo=
+=TrCi
 -----END PGP SIGNATURE-----

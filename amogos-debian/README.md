@@ -5,6 +5,9 @@ The archive contains all four AmogOS applications, amogos-system, amogos-update,
 amogos-archive-keyring. See [PACKAGES.md](PACKAGES.md) for exact versions
 and direct downloads.
 
+The latest Music binary release is [1.0.22-alpha, build 2027](docs/music-1.0.22-alpha2027.md),
+available to APT as amogos-music version **1.0.22~alpha2027**.
+
 ## Install the repository
 
 Once GitHub Pages has published this checkout:
