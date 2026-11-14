@@ -145,6 +145,23 @@ Description: AmogOS Music player
  Music discovery, playlists, downloads, and local playback.
  Built with Flutter 3.0.5 for AmogOS 2 Pro and Debian 13 amd64.
 
+Package: amogos-music
+Version: 1.0.23~alpha2032
+Architecture: amd64
+Maintainer: AmogOS
+Depends: libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-bad, gstreamer1.0-libav, libsecret-1-0, libjsoncpp26, libgl1, libegl1, libstdc++6, ca-certificates, xdg-utils, zenity
+Recommends: gnome-keyring
+Filename: pool/main/a/amogos-music/amogos-music_1.0.23~alpha2032_amd64.deb
+Size: 9055704
+MD5sum: ed669b41ec9cfc0ed95f0c3cd7c38dcd
+SHA1: 22cdbdfeed3b3c224316f6cc3836be325877adf5
+SHA256: ce6622c85ca3917fba422f1990707dd48a816be835f30b1de0bf3e7ec284c545
+Section: sound
+Priority: optional
+Description: AmogOS Music player
+ Music discovery, playlists, downloads, and local playback.
+ Built with Flutter 3.0.5 for AmogOS 2 Pro and Debian 13 amd64.
+
 Package: amogos-notes
 Version: 1.0.0-3
 Architecture: amd64

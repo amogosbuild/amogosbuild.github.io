@@ -1,0 +1,357 @@
+Package: amogos-archive-keyring
+Version: 2.0.0-1
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 26
+Depends: apt (>= 1.1)
+Filename: pool/main/a/amogos-archive-keyring/amogos-archive-keyring_2.0.0-1_all.deb
+Size: 1228
+MD5sum: c714ebd9c70aa5a5f032daa99f09eccd
+SHA1: f8f277cf6b16f759484fe974222140cb32f062e8
+SHA256: 4897fcf13828e666095d502eadb0f73975efc0c7d751764625623e32d00a703d
+Section: misc
+Priority: optional
+Description: AmogOS archive signing key and APT source
+ Installs the scoped public archive key and the stable AmogOS repository
+ for Debian 13 amd64. Debian remains the source of system dependencies.
+
+Package: amogos-installer
+Version: 0.1.3
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core
+Filename: pool/main/a/amogos-installer/amogos-installer_0.1.3_amd64.deb
+Size: 7957624
+MD5sum: d09e833ff60dc4ee6ee5dd9d6c7c385d
+SHA1: 60efbce1e4ed74c374d642fa21a46ff22c1a2b45
+SHA256: 1f7d6954f6c987578620d7ef357554296683ed71bb89039c0d3eef830b76e3c4
+Section: admin
+Priority: optional
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.
+
+Package: amogos-installer
+Version: 0.1.3-1
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core
+Filename: pool/main/a/amogos-installer/amogos-installer_0.1.3-1_amd64.deb
+Size: 7956712
+MD5sum: f7c280b0fe108d3000c848a856f798e3
+SHA1: 3cd1f06b08a4236c5a8d2366d9ea646157255ab8
+SHA256: 87545c1bb933a168527546d623529d1625eba02fc90e3faa44d99c6eee0d724e
+Section: admin
+Priority: optional
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.
+
+Package: amogos-installer
+Version: 0.1.4
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core
+Filename: pool/main/a/amogos-installer/amogos-installer_0.1.4_amd64.deb
+Size: 7962152
+MD5sum: 907ecbde8555b1e436f60cf719715fb3
+SHA1: a91e6965bfe74f4944d5a0fdf0183dbf878460ea
+SHA256: 74091477dacaba7cd626ec7812816b9fe6b9f8fa122ae5ac98ed39c40761d8ee
+Section: admin
+Priority: optional
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.
+
+Package: amogos-installer
+Version: 0.1.4-1
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core
+Filename: pool/main/a/amogos-installer/amogos-installer_0.1.4-1_amd64.deb
+Size: 7962940
+MD5sum: 8acecb68f298090128178712a4222f45
+SHA1: e7c220af7ed007b5e4386a23bcc05a8a54d6940d
+SHA256: 5eee824bca8abdc681b4bd0d1879c0dbcf8983ae799037362acdbec013dcc34b
+Section: admin
+Priority: optional
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.
+
+Package: amogos-installer
+Version: 0.1.5
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core, amogos-system (>= 2.1.0-1)
+Filename: pool/main/a/amogos-installer/amogos-installer_0.1.5_amd64.deb
+Size: 7964060
+MD5sum: 9cada9c88a6f929572da5d187959a318
+SHA1: b378fc3d6c48a9a3e2b45e73cea718394b53ccf8
+SHA256: c9eb9e3f67946e697884c2d904201db079d71b35cc777b3222ade324d5953161
+Section: admin
+Priority: optional
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.
+
+Package: amogos-installer
+Version: 0.1.6
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, pkexec, polkitd, libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, gstreamer1.0-plugins-bad, libgl1, libegl1, libstdc++6, util-linux, fdisk, parted, e2fsprogs, dosfstools, ntfs-3g, squashfs-tools, rsync, grub-pc-bin, grub-efi-amd64-bin, grub2-common, os-prober, efibootmgr, initramfs-tools, locales, xkb-data, nvidia-detect, plymouth, plymouth-themes, systemd-boot-efi, systemd-boot-tools, fonts-dejavu-core, amogos-system (>= 2.1.0-2)
+Filename: pool/main/a/amogos-installer/amogos-installer_0.1.6_amd64.deb
+Size: 7966100
+MD5sum: 9e9e1942006a878ceedcf9fe3fd2b07e
+SHA1: 77a80788b919002e2041b6ac31f1a51ff7547ac3
+SHA256: 8fbd4616ad5ac5277d66493d14d18b0d9585bfd65efc3d9e706e2ae7d247436a
+Section: admin
+Priority: optional
+Description: AmogOS 2 Pro installer with an installation arcade and soundtrack
+ Guided storage setup, dual-boot detection, manual partition assignment,
+ bundled mini-games, and optional YouTube Music playback.
+
+Package: amogos-music
+Version: 1.0.20~alpha2022
+Architecture: amd64
+Maintainer: AmogOS
+Depends: libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-bad, gstreamer1.0-libav, libsecret-1-0, libjsoncpp26, libgl1, libegl1, libstdc++6, ca-certificates, xdg-utils, zenity
+Recommends: gnome-keyring
+Filename: pool/main/a/amogos-music/amogos-music_1.0.20~alpha2022_amd64.deb
+Size: 8699700
+MD5sum: 7dba24dead7bf95537547fb154062b31
+SHA1: 089cac405e50ba0194efc7fb261ff0ae14053b5c
+SHA256: ef7e412e1d8ecdfef6e1a675b9e9ec5608c7a3200ce8dc3134f03d5875f11a2b
+Section: sound
+Priority: optional
+Description: AmogOS Music player
+ Music discovery, playlists, downloads, and local playback.
+ Built with Flutter 3.0.5 for AmogOS 2 Pro and Debian 13 amd64.
+
+Package: amogos-music
+Version: 1.0.22~alpha2027
+Architecture: amd64
+Maintainer: AmogOS
+Depends: libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-bad, gstreamer1.0-libav, libsecret-1-0, libjsoncpp26, libgl1, libegl1, libstdc++6, ca-certificates, xdg-utils, zenity
+Recommends: gnome-keyring
+Filename: pool/main/a/amogos-music/amogos-music_1.0.22~alpha2027_amd64.deb
+Size: 8975844
+MD5sum: 104dc710a5603a2d30accd794ff5f60e
+SHA1: 2617795a342fa2e28cc0a6019e5528a8a127b16f
+SHA256: 41d1d7a6502839b7ecfa72602f63b2b48890da9e94836eb6b73327418032b77c
+Section: sound
+Priority: optional
+Description: AmogOS Music player
+ Music discovery, playlists, downloads, and local playback.
+ Built with Flutter 3.0.5 for AmogOS 2 Pro and Debian 13 amd64.
+
+Package: amogos-music
+Version: 1.0.23~alpha2032
+Architecture: amd64
+Maintainer: AmogOS
+Depends: libgtk-3-0t64, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-bad, gstreamer1.0-libav, libsecret-1-0, libjsoncpp26, libgl1, libegl1, libstdc++6, ca-certificates, xdg-utils, zenity
+Recommends: gnome-keyring
+Filename: pool/main/a/amogos-music/amogos-music_1.0.23~alpha2032_amd64.deb
+Size: 9055704
+MD5sum: ed669b41ec9cfc0ed95f0c3cd7c38dcd
+SHA1: 22cdbdfeed3b3c224316f6cc3836be325877adf5
+SHA256: ce6622c85ca3917fba422f1990707dd48a816be835f30b1de0bf3e7ec284c545
+Section: sound
+Priority: optional
+Description: AmogOS Music player
+ Music discovery, playlists, downloads, and local playback.
+ Built with Flutter 3.0.5 for AmogOS 2 Pro and Debian 13 amd64.
+
+Package: amogos-notes
+Version: 1.0.0-3
+Architecture: amd64
+Maintainer: AmogOS
+Installed-Size: 22828
+Depends: libc6 (>= 2.41), libgtk-3-0t64, libglib2.0-0t64, libstdc++6, libgl1, libegl1, xdg-utils, zenity
+Filename: pool/main/a/amogos-notes/amogos-notes_1.0.0-3_amd64.deb
+Size: 7149392
+MD5sum: 876c1e4caca484a5ac561b3aa60b3011
+SHA1: 1604eb6ca6c929c43e966546573ba5afe215ca8b
+SHA256: 837cb041916c81b3d095be2309834ca5f80dee9082b27490c67c45923df4d5ab
+Section: editors
+Priority: optional
+Description: AmogOS Notes with Markdown and local attachments
+ Local notes with autosave, search, pinning, light and dark themes,
+ Markdown editing and attachments. Built with Flutter 3.0.5 for
+ AmogOS 2 Pro and Debian 13 amd64.
+
+Package: amogos-store
+Version: 0.1.3
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, python3-gi, gir1.2-appstream-1.0, appstream, ca-certificates, libfuse2t64, pkexec, polkitd, xdg-utils, zenity, libgtk-3-0t64, libgl1, libegl1, libstdc++6
+Recommends: flatpak, xdg-desktop-portal
+Filename: pool/main/a/amogos-store/amogos-store_0.1.3_amd64.deb
+Size: 8373760
+MD5sum: 73ae062592e155106c2ca9d8205a01eb
+SHA1: d6e45138ac5e5f2cd4d28e70ba2fde868e0683c3
+SHA256: 2407b0457f29974f8a0f5b3e9e0d008992bdb10f5d852b7b9de07a251b811deb
+Section: admin
+Priority: optional
+Description: AmogOS App Store and system updates
+ Software discovery and installation from APT, Flathub, and AppImageHub,
+ with available-source selection and a shared installation queue.
+
+Package: amogos-store
+Version: 0.1.4
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, ca-certificates, libfuse2t64, pkexec, polkitd, xdg-utils, zenity, libgtk-3-0t64, libgl1, libegl1, libstdc++6, qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Recommends: flatpak, xdg-desktop-portal
+Filename: pool/main/a/amogos-store/amogos-store_0.1.4_amd64.deb
+Size: 8384652
+MD5sum: 6f6db8c471f7824364c5e0fa7a6119c7
+SHA1: f38c1cdc8fe47a77cca995853fb8b9234e851f9e
+SHA256: 523773c5f4acf8a4cbde1a611c08e32aaac5d0ce689e00fcb9d0499403d1856c
+Section: admin
+Priority: optional
+Description: AmogOS App Store and system updates
+ Software discovery and installation from APT, Flathub, and AppImageHub,
+ with available-source selection and a shared installation queue.
+
+Package: amogos-store
+Version: 0.1.5
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, python3-gi, gir1.2-glib-2.0, ca-certificates, libfuse2t64, pkexec, polkitd, xdg-utils, zenity, libgtk-3-0t64, libgl1, libegl1, libstdc++6, qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Recommends: flatpak, xdg-desktop-portal
+Filename: pool/main/a/amogos-store/amogos-store_0.1.5_amd64.deb
+Size: 8389224
+MD5sum: 09eb56462c1afabbe1139fc243cabc13
+SHA1: a339508c8ca534910399bb094426180208e17eab
+SHA256: 73b257f0a5fd50ee84b1b22d2e6dc80449a91c07488ca2ef03a1986956b21797
+Section: admin
+Priority: optional
+Description: AmogOS App Store and system updates
+ Software discovery and installation from APT, Flathub, and AppImageHub,
+ with available-source selection and a shared installation queue.
+
+Package: amogos-store
+Version: 0.1.6
+Architecture: amd64
+Maintainer: AmogOS
+Depends: python3, python3-apt, python3-gi, gir1.2-glib-2.0, acl, systemd, ca-certificates, libfuse2t64, pkexec, polkitd, xdg-utils, zenity, libgtk-3-0t64, libgl1, libegl1, libstdc++6, qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Recommends: flatpak, xdg-desktop-portal
+Filename: pool/main/a/amogos-store/amogos-store_0.1.6_amd64.deb
+Size: 8395512
+MD5sum: 1ef6fabe1bfab1c3f563faa7c16772d8
+SHA1: 7e021e4b08a67f4fa35baa734aff4093ec8786af
+SHA256: 09b78fc651be248a56fda91de16d33720ef318839ca848640e4b27f5aed4270f
+Section: admin
+Priority: optional
+Description: AmogOS App Store and system updates
+ Software discovery and installation from APT, Flathub, and AppImageHub,
+ with available-source selection and a shared installation queue.
+
+Package: amogos-system
+Version: 2.1.0-1
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 114
+Depends: plymouth, initramfs-tools, python3, fonts-dejavu-core
+Replaces: amogos-installer (<< 0.1.5)
+Filename: pool/main/a/amogos-system/amogos-system_2.1.0-1_all.deb
+Size: 32438
+MD5sum: 0fcd9e150553db128e7e2dd02195d54b
+SHA1: 31b4280805b42af53193dfb1dbf8f48c70b8db88
+SHA256: 343a70af6678076e48c18b165414d02e7ba1d7662d7fd6a284fbfc5a1c018f1a
+Section: admin
+Priority: optional
+Description: Persistent AmogOS boot theme and system defaults
+ Retains the boot animation and low-memory system configuration after the
+ live-session installation tools have been removed.
+
+Package: amogos-system
+Version: 2.1.0-2
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 127
+Depends: plymouth, initramfs-tools, python3, fonts-dejavu-core
+Replaces: amogos-installer (<< 0.1.5)
+Filename: pool/main/a/amogos-system/amogos-system_2.1.0-2_all.deb
+Size: 33108
+MD5sum: 94557c3cae068278b6d2e8e22078a8e5
+SHA1: 8cb668ad086e09a11970bb65c1906b83a0d79d46
+SHA256: e764f43fc6071ecea0771bc937e828d31f1940bfa32874aa756f79a99efa1d6b
+Section: admin
+Priority: optional
+Description: Persistent AmogOS boot theme and system defaults
+ Retains the boot animation, root ownership protection, credits command and
+ low-memory defaults after the live-session installation tools are removed.
+
+Package: amogos-update
+Version: 2.0.0-1
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 9
+Depends: dash, coreutils, dpkg
+Filename: pool/main/a/amogos-update/amogos-update_2.0.0-1_all.deb
+Size: 1072
+MD5sum: eead29670d77e11633e2b2a5325e2e70
+SHA1: 6b26168edafb5ed7d8cb04f82d7cdf8e1328488e
+SHA256: 5a0ff25513cde8690dfe2318201ef2e7be26fda8e60799402385934f85cab2c3
+Section: admin
+Priority: optional
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. The initial migration is a no-op.
+
+Package: amogos-update
+Version: 2.1.0-1
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 36
+Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-1), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Filename: pool/main/a/amogos-update/amogos-update_2.1.0-1_all.deb
+Size: 7422
+MD5sum: fa624e52db52994fd9840ec415d06b27
+SHA1: fc49ef98330eb573522236b1f51bbe1e28088c1c
+SHA256: 91a98252d5cccbd96f93876c9e52dc3e7e7982b81738d1c08378a9767175b44a
+Section: admin
+Priority: optional
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. Release 2.1 repairs desktop application
+ compatibility, repository defaults and installed-system identity.
+
+Package: amogos-update
+Version: 2.1.0-2
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 22
+Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-1), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Filename: pool/main/a/amogos-update/amogos-update_2.1.0-2_all.deb
+Size: 3112
+MD5sum: 901a62e3158387e2346b28d3c599790a
+SHA1: cb34dd90e4dad6ab35b18f5120d193fdf309ed2f
+SHA256: c0a898c45863ad51701c0f733f8255bbc37f0ff4104142ea8b3b7504cf041976
+Section: admin
+Priority: optional
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. Release 2.1 repairs desktop application
+ compatibility, repository defaults and installed-system identity.
+
+Package: amogos-update
+Version: 2.1.0-3
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 22
+Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-2), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Filename: pool/main/a/amogos-update/amogos-update_2.1.0-3_all.deb
+Size: 3226
+MD5sum: d1da3b9d88b3add30810a84c3cc7424a
+SHA1: e565f6b0d4f1d26460c55c2fb3d313d4ac13e7a9
+SHA256: af096dd7bfa5dde670f95776258c641c91ee062611e6b2c82d55007c4a07185d
+Section: admin
+Priority: optional
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. Release 2.1 repairs desktop application
+ compatibility, repository defaults and installed-system identity.
+

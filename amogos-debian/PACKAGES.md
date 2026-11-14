@@ -13,6 +13,7 @@ Generated from the archive metadata. All application DEBs target Debian 13 amd64
 | amogos-installer | 0.1.6 | amd64 | amogos-installer | [DEB](pool/main/a/amogos-installer/amogos-installer_0.1.6_amd64.deb) |
 | amogos-music | 1.0.20~alpha2022 | amd64 | amogos-music | [DEB](pool/main/a/amogos-music/amogos-music_1.0.20~alpha2022_amd64.deb) |
 | amogos-music | 1.0.22~alpha2027 | amd64 | amogos-music | [DEB](pool/main/a/amogos-music/amogos-music_1.0.22~alpha2027_amd64.deb) |
+| amogos-music | 1.0.23~alpha2032 | amd64 | amogos-music | [DEB](pool/main/a/amogos-music/amogos-music_1.0.23~alpha2032_amd64.deb) |
 | amogos-notes | 1.0.0-3 | amd64 | amogos-notes | [DEB](pool/main/a/amogos-notes/amogos-notes_1.0.0-3_amd64.deb) |
 | amogos-store | 0.1.3 | amd64 | amogos-appstore | [DEB](pool/main/a/amogos-store/amogos-store_0.1.3_amd64.deb) |
 | amogos-store | 0.1.4 | amd64 | amogos-appstore | [DEB](pool/main/a/amogos-store/amogos-store_0.1.4_amd64.deb) |
