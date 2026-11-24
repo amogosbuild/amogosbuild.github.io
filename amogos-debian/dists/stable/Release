@@ -3,16 +3,16 @@ Label: AmogOS 2 Pro
 Suite: stable
 Codename: chocolatier
 Version: 2.1
-Date: Sat, 14 Nov 2026 00:29:37 +0000
+Date: Tue, 24 Nov 2026 04:02:52 +0000
 Architectures: amd64
 Components: main
 Acquire-By-Hash: yes
 Description: AmogOS 2 Pro applications and versioned system updates for Debian 13
 SHA256:
- 350b39ba5bde405197ebbfed58972b04dbf2b148f0514aaf5523cc082c66cf47 17674 main/binary-amd64/Packages
- 197e5abab5241a97b875f2d8d693c8c78524809cf8e519dfbbefb60b16585c01 3920 main/binary-amd64/Packages.gz
- 1bf9c5a36eec9ff325ad9a913870be065bf3be89112a79a3105f6f086f928d01 3680 main/binary-amd64/Packages.xz
+ fec6777b6f2f7d6bcbaf82f93dbc9658e3f36600423397843d34407aad2b4e0f 18482 main/binary-amd64/Packages
+ 92c20df824fefce58e328604226e1c88d6b9bacc6b0047cd65568290b22d209b 4047 main/binary-amd64/Packages.gz
+ b6f1de6932fe9026b0a86bb574bd3da6c5d8d31863843d42d2695eb99f3eb949 3788 main/binary-amd64/Packages.xz
 SHA512:
- 5bce5154ad16f30e6cca47d60c38df56f6cb0513f981ac8d52d481586d06a14f4ea175937162f27d815238cdb20501015469159bf30406613426c7a18e3785bc 17674 main/binary-amd64/Packages
- e199061e2f91468979205d2cf9fb0ccdeff4fae44a76116d43a6af4fd69d7da31371246393b04b87f05618c69eb061ceedebe99d0eadf587d3e2810b8adcf077 3920 main/binary-amd64/Packages.gz
- edaab2019992649ddb709d7a37fd5cf6cc3ae56af3e29333ee393f93a1db6e16cf04b289f45c72814d062031ac7d492a9a1872ba9dbdb8b2abea19e677e87156 3680 main/binary-amd64/Packages.xz
+ 61cd645a497ec6a401d8020ba2daa2ed5a7621b14f851366b36824ec641f33addb966d01f625278ee2904a4774db8177a20e843a2d021b244f8975753bcf9645 18482 main/binary-amd64/Packages
+ d8d8472b45cbca2487dfd16fbfdcd1031e45e6b22582246f6bf9cb39f24d38742195b18aa88704c009de646ee73d84a7f6590f608ec3fb9c025ce293ff3fef71 4047 main/binary-amd64/Packages.gz
+ 758b852df01dee9352893da36089e42ba1b59f4012a8792191b8c56fbb5e8da774c2f7b2a7e261ec8759bfa0d13f5dabb8fab9bfad7d7f293e6aa14daf1e6d6e 3788 main/binary-amd64/Packages.xz
