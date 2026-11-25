@@ -78,7 +78,7 @@ def build_package(source, destination, public_key=None, version=None, payload=No
                         path.chmod(0o755)
                     elif (resources/path.relative_to(stage)).is_file():
                         path.chmod(0o644)
-            for name in ('usr/bin/amogos-credits','usr/libexec/amogos-installed-cleanup','usr/libexec/amogos-root-ownership'):
+            for name in ('usr/bin/amogos-credits','usr/libexec/amogos-installed-cleanup','usr/libexec/amogos-root-ownership','usr/libexec/amogos-desktop-shortcuts','etc/skel/Desktop/steam-big-picture.desktop'):
                 executable=stage/name
                 if executable.exists():
                     executable.chmod(0o755)

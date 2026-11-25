@@ -4,7 +4,7 @@
   "codename": "chocolatier",
   "supportedSystem": "Debian 13 amd64",
   "signingFingerprint": "AD0DEB95462DBF4C6C4F3A5571447013FAF2C774",
-  "generatedUtc": "2026-11-24T04:02:52.967471+00:00",
+  "generatedUtc": "2026-11-25T01:06:43.841046+00:00",
   "packages": [
     {
       "package": "amogos-archive-keyring",
@@ -151,6 +151,14 @@
       "sha256": "e764f43fc6071ecea0771bc937e828d31f1940bfa32874aa756f79a99efa1d6b"
     },
     {
+      "package": "amogos-system",
+      "version": "2.1.0-3",
+      "architecture": "all",
+      "filename": "pool/main/a/amogos-system/amogos-system_2.1.0-3_all.deb",
+      "bytes": 34324,
+      "sha256": "c847549168f93447dd2e22b6f04eab5fc3a4ac0523dbf814f97ad882785f2205"
+    },
+    {
       "package": "amogos-update",
       "version": "2.0.0-1",
       "architecture": "all",
@@ -181,6 +189,14 @@
       "filename": "pool/main/a/amogos-update/amogos-update_2.1.0-3_all.deb",
       "bytes": 3226,
       "sha256": "af096dd7bfa5dde670f95776258c641c91ee062611e6b2c82d55007c4a07185d"
+    },
+    {
+      "package": "amogos-update",
+      "version": "2.1.0-4",
+      "architecture": "all",
+      "filename": "pool/main/a/amogos-update/amogos-update_2.1.0-4_all.deb",
+      "bytes": 3226,
+      "sha256": "b63d275d7a2bef966057d79abae0b00c7e5656e64109e5bbdc4bad4838b862a4"
     }
   ]
 }

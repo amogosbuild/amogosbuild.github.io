@@ -301,6 +301,24 @@ Description: Persistent AmogOS boot theme and system defaults
  Retains the boot animation, root ownership protection, credits command and
  low-memory defaults after the live-session installation tools are removed.
 
+Package: amogos-system
+Version: 2.1.0-3
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 153
+Depends: plymouth, initramfs-tools, python3, fonts-dejavu-core, xdg-user-dirs
+Replaces: amogos-installer (<< 0.1.5)
+Filename: pool/main/a/amogos-system/amogos-system_2.1.0-3_all.deb
+Size: 34324
+MD5sum: f9e8c8ad561f44d6255a41f62df5d3fb
+SHA1: 04fadc94f2e4974bd889d544c41b3ed7a5f37095
+SHA256: c847549168f93447dd2e22b6f04eab5fc3a4ac0523dbf814f97ad882785f2205
+Section: admin
+Priority: optional
+Description: Persistent AmogOS boot theme and system defaults
+ Retains the boot animation, root ownership protection, credits command and
+ desktop shortcuts and low-memory defaults after the live-session installation tools are removed.
+
 Package: amogos-update
 Version: 2.0.0-1
 Architecture: all
@@ -365,6 +383,24 @@ Size: 3226
 MD5sum: d1da3b9d88b3add30810a84c3cc7424a
 SHA1: e565f6b0d4f1d26460c55c2fb3d313d4ac13e7a9
 SHA256: af096dd7bfa5dde670f95776258c641c91ee062611e6b2c82d55007c4a07185d
+Section: admin
+Priority: optional
+Description: Versioned AmogOS system update migrations
+ Runs the packaged AmogOS migration script when a newer package version
+ is configured by APT or dpkg. Release 2.1 repairs desktop application
+ compatibility, repository defaults and installed-system identity.
+
+Package: amogos-update
+Version: 2.1.0-4
+Architecture: all
+Maintainer: AmogOS
+Installed-Size: 22
+Depends: dash, coreutils, dpkg, python3, python3-apt, amogos-system (>= 2.1.0-3), amogos-store (>= 0.1.4), qtwayland5, qt6-wayland, xwayland, xauth, libxcb-cursor0
+Filename: pool/main/a/amogos-update/amogos-update_2.1.0-4_all.deb
+Size: 3226
+MD5sum: dec4d3425bd127fcb2a074b6ed91b1c0
+SHA1: 10d0d733ea9ac318520992b91d32b149a6d182db
+SHA256: b63d275d7a2bef966057d79abae0b00c7e5656e64109e5bbdc4bad4838b862a4
 Section: admin
 Priority: optional
 Description: Versioned AmogOS system update migrations

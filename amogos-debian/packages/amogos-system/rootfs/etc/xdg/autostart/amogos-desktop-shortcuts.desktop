@@ -1,0 +1,9 @@
+# Apply persistent AmogOS desktop shortcuts in the current user's desktop folder.
+[Desktop Entry]
+Type=Application
+Name=AmogOS desktop shortcuts
+Exec=/usr/libexec/amogos-desktop-shortcuts
+TryExec=/usr/libexec/amogos-desktop-shortcuts
+Terminal=false
+NoDisplay=true
+X-KDE-autostart-phase=2

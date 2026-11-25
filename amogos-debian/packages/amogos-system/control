@@ -1,11 +1,11 @@
 Package: amogos-system
-Version: 2.1.0-2
+Version: 2.1.0-3
 Section: admin
 Priority: optional
 Architecture: all
 Maintainer: AmogOS
-Depends: plymouth, initramfs-tools, python3, fonts-dejavu-core
+Depends: plymouth, initramfs-tools, python3, fonts-dejavu-core, xdg-user-dirs
 Replaces: amogos-installer (<< 0.1.5)
 Description: Persistent AmogOS boot theme and system defaults
  Retains the boot animation, root ownership protection, credits command and
- low-memory defaults after the live-session installation tools are removed.
+ desktop shortcuts and low-memory defaults after the live-session installation tools are removed.

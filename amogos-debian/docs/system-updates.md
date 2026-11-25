@@ -1,6 +1,6 @@
 # AmogOS 2.1 system update
 
-The signed `amogos-update` 2.1.0-3 package upgrades AmogOS 2.0 and repairs existing 2.1 installations through normal APT updates. It depends on App Store 0.1.4 or newer and `amogos-system` 2.1.0-2 or newer. The OS version remains 2.1. No ISO reinstall is required.
+The signed `amogos-update` 2.1.0-4 package upgrades AmogOS 2.0 and repairs existing 2.1 installations through normal APT updates. It depends on App Store 0.1.4 or newer and `amogos-system` 2.1.0-3 or newer. The OS version remains 2.1. No ISO reinstall is required.
 
     sudo apt update
     sudo apt full-upgrade
@@ -9,6 +9,8 @@ The signed `amogos-update` 2.1.0-3 package upgrades AmogOS 2.0 and repairs exist
 The App Store's system updates use the same signed package versions. Online AmogOS Installer installations also perform the full upgrade and verify that no updates or package configuration remain pending.
 
 ## Changes
+
+- Adds Steam Big Picture to existing users’ desktop folders and to `/etc/skel/Desktop` for new accounts. The executable shortcut opens `steam -gamepadui`; a small login task handles localized Desktop folders. It preserves existing shortcuts and remains after installation tools are removed.
 
 - Sets `OS_VERSION` and `VERSION_ID` to 2.1, updates the other AmogOS identity files, and removes the old identity comment. The local dpkg diversion retains AmogOS identity across Debian base-files upgrades; the vendor backup is preserved.
 - Restores normal APT recommendations and provides Qt 5/Qt 6 Wayland plugins, XWayland and X11 support for current and future desktop packages. It does not force a global Qt platform override. VLC 3 and Krita use XWayland in a Wayland session; reboot after the update to refresh the desktop display environment.

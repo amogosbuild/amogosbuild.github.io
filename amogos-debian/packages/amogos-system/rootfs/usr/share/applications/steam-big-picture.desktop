@@ -1,0 +1,11 @@
+# Launch Steam directly into its controller-friendly Big Picture interface.
+[Desktop Entry]
+Type=Application
+Name=Steam Big Picture
+Comment=Play your Steam games in Big Picture mode
+Exec=steam -gamepadui
+TryExec=steam
+Icon=steam
+Terminal=false
+Categories=Game;
+StartupNotify=true

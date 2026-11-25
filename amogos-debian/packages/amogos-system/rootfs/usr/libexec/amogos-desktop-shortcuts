@@ -1,0 +1,67 @@
+#!/usr/bin/python3
+import os
+import pathlib
+import pwd
+import subprocess
+import sys
+
+SOURCE = pathlib.Path('/usr/share/applications/steam-big-picture.desktop')
+
+
+def install():
+    home = pathlib.Path.home()
+    try:
+        desktop = subprocess.check_output(
+            ['/usr/bin/xdg-user-dir', 'DESKTOP'], text=True, timeout=5
+        ).strip()
+    except (OSError, subprocess.SubprocessError):
+        desktop = str(home / 'Desktop')
+    target = pathlib.Path(desktop)
+    if not target.is_absolute() or target == home:
+        return
+    target.mkdir(parents=True, exist_ok=True)
+    try:
+        descriptor = os.open(
+            target / SOURCE.name, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o755
+        )
+    except FileExistsError:
+        return
+    with os.fdopen(descriptor, 'wb') as stream:
+        stream.write(SOURCE.read_bytes())
+        os.fchmod(stream.fileno(), 0o755)
+
+
+def all_users():
+    for account in pwd.getpwall():
+        home = pathlib.Path(account.pw_dir)
+        if not 1000 <= account.pw_uid < 65534 or not home.is_dir():
+            continue
+        child = os.fork()
+        if child == 0:
+            try:
+                os.setgroups([])
+                os.setgid(account.pw_gid)
+                os.setuid(account.pw_uid)
+                os.environ.clear()
+                os.environ.update(
+                    HOME=str(home), USER=account.pw_name, LOGNAME=account.pw_name,
+                    PATH='/usr/bin:/bin', LANG='C.UTF-8'
+                )
+                os.chdir(home)
+                install()
+            except Exception as error:
+                print(f'Could not add Steam Big Picture for {account.pw_name}: {error}', file=sys.stderr, flush=True)
+                os._exit(1)
+            os._exit(0)
+        _, status = os.waitpid(child, 0)
+        if status:
+            print(f'Desktop shortcut setup will retry at the next login for {account.pw_name}.', file=sys.stderr)
+
+
+if __name__ == '__main__':
+    if sys.argv[1:] == ['--all-users'] and os.geteuid() == 0:
+        all_users()
+    elif not sys.argv[1:] and os.geteuid() != 0:
+        install()
+    elif sys.argv[1:]:
+        raise SystemExit('Usage: amogos-desktop-shortcuts [--all-users]')

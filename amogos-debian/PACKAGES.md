@@ -22,7 +22,9 @@ Generated from the archive metadata. All application DEBs target Debian 13 amd64
 | amogos-store | 0.1.6 | amd64 | amogos-appstore | [DEB](pool/main/a/amogos-store/amogos-store_0.1.6_amd64.deb) |
 | amogos-system | 2.1.0-1 | all | Persistent boot theme and system policy | [DEB](pool/main/a/amogos-system/amogos-system_2.1.0-1_all.deb) |
 | amogos-system | 2.1.0-2 | all | Persistent boot theme and system policy | [DEB](pool/main/a/amogos-system/amogos-system_2.1.0-2_all.deb) |
+| amogos-system | 2.1.0-3 | all | Persistent boot theme and system policy | [DEB](pool/main/a/amogos-system/amogos-system_2.1.0-3_all.deb) |
 | amogos-update | 2.0.0-1 | all | amogos-update | [DEB](pool/main/a/amogos-update/amogos-update_2.0.0-1_all.deb) |
 | amogos-update | 2.1.0-1 | all | amogos-update | [DEB](pool/main/a/amogos-update/amogos-update_2.1.0-1_all.deb) |
 | amogos-update | 2.1.0-2 | all | amogos-update | [DEB](pool/main/a/amogos-update/amogos-update_2.1.0-2_all.deb) |
 | amogos-update | 2.1.0-3 | all | amogos-update | [DEB](pool/main/a/amogos-update/amogos-update_2.1.0-3_all.deb) |
+| amogos-update | 2.1.0-4 | all | amogos-update | [DEB](pool/main/a/amogos-update/amogos-update_2.1.0-4_all.deb) |
